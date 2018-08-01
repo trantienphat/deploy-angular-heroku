@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../../shared/services/shared.service';
+import { PageName } from '../../shared/constants/routing.constant';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedService: SharedService) { }
 
   ngOnInit() {
+  }
+
+  onClickSignInButton() {
+    this.sharedService.routingToPage(PageName.HOME_PAGE);
   }
 
 }
