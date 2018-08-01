@@ -20,7 +20,7 @@ export class DashboardPageComponent implements OnInit {
     this.sharedService.routingToPage(PageName.ACCOUNT_PAGE);
   }
 
-  onClickChangPasswordButton() {
+  onClickChangePasswordButton() {
     this.sharedService.routingToPage(PageName.CHANGE_PASSWORD_PAGE);
   }
 
@@ -36,7 +36,7 @@ export class DashboardPageComponent implements OnInit {
     this.sharedService.routingToPage(PageName.LISTING_STUDENT_PAGE);
   }
 
-  onClickListingRequisition() {
+  onClickListingRequisitions() {
     this.sharedService.routingToPage(PageName.LISTING_REQUISITION_PAGE);
   }
 
