@@ -11,13 +11,13 @@
           {{userName}}
         </button>
         <div ngbDropdownMenu class="pop-menu border rounded-0">
-          <button class="dropdown-item"> <i class="fa fas fa-user-circle"></i> Tài khoản</button>
-          <button class="dropdown-item"> <i class="fa fas fa-key"></i> Đổi mật khẩu</button>
-          <button class="dropdown-item">  <i class="fa fas fa-address-card"></i> Thống kê</button>
-          <button class="dropdown-item"> <i class="fa fas fa-list-alt"></i> Danh sách gia sư</button>
-          <button class="dropdown-item"> <i class="fa far fa-list-alt"></i> Danh sách học viên</button>
-          <button class="dropdown-item"> <i class="fa far fa-list-alt"></i> Danh sách yêu cầu</button>
-          <button class="dropdown-item"> <i class="fa fas fa-power-off"></i> Đăng xuất</button>
+          <button class="dropdown-item" (click)="onClickAccountButton()"> <i class="fa fas fa-user-circle"></i> Tài khoản</button>
+          <button class="dropdown-item" (click)="onClickChangePasswordButton()"> <i class="fa fas fa-key"></i> Đổi mật khẩu</button>
+          <button class="dropdown-item" (click)="onClickDashboardButton()"> <i class="fa fas fa-address-card"></i> Thống kê</button>
+          <button class="dropdown-item" (click)="onClickListingTutorsButton()"> <i class="fa fas fa-list-alt"></i> Danh sách gia sư</button>
+          <button class="dropdown-item" (click)="onClickListingStudentsButton()"> <i class="fa far fa-list-alt"></i> Danh sách học viên</button>
+          <button class="dropdown-item" (click)="onClickListingRequisitionsButton()"> <i class="fa far fa-list-alt"></i> Danh sách yêu cầu</button>
+          <button class="dropdown-item" (click)="onClickLooutButton()"> <i class="fa fas fa-power-off"></i> Đăng xuất</button>
         </div>
       </div>
     </div>

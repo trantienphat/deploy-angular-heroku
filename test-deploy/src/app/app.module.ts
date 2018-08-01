@@ -9,8 +9,12 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { SharedService } from './shared/services/shared.service';
-import { HomePageComponent } from './containers/home-page/home-page.component';
 import { DashboardPageComponent } from './containers/dashboard-page/dashboard-page.component';
+import { AccountPageComponent } from './containers/account-page/account-page.component';
+import { ChangePasswordPageComponent } from './containers/change-password-page/change-password-page.component';
+import { ListingTutorsPageComponent } from './containers/listing-tutors-page/listing-tutors-page.component';
+import { ListingStudentsPageComponent } from './containers/listing-students-page/listing-students-page.component';
+import { ListingRequisitionsPageComponent } from './containers/listing-requisitions-page/listing-requisitions-page.component';
 
 
 
@@ -18,8 +22,12 @@ import { DashboardPageComponent } from './containers/dashboard-page/dashboard-pa
   declarations: [
     AppComponent,
     LoginComponent,
-    HomePageComponent,
     DashboardPageComponent,
+    AccountPageComponent,
+    ChangePasswordPageComponent,
+    ListingTutorsPageComponent,
+    ListingStudentsPageComponent,
+    ListingRequisitionsPageComponent
   ],
   imports: [
     BrowserModule,
