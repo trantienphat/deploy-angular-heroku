@@ -9,11 +9,22 @@ import { PageName } from '../../shared/constants/routing.constant';
 })
 export class AccountPageComponent implements OnInit {
 
+
+  public user: any = '';
+
   public userName = 'Username';
+
+  public userAvatar = '';
+  public defaultAvatar = '/assets/img/images_default_avatar.png';
 
   constructor(private sharedService: SharedService) { }
 
   ngOnInit() {
+    this.setAvatarUser();
+  }
+
+  setAvatarUser() {
+    this.userAvatar = this.user ? this.user : this.defaultAvatar;
   }
 
   onClickAccountButton() {
