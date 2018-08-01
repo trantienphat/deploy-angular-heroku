@@ -8,6 +8,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { SharedService } from './shared/services/shared.service';
 import { HomePageComponent } from './containers/home-page/home-page.component';
+import { DashboardPageComponent } from './containers/dashboard-page/dashboard-page.component';
 
 
 
@@ -15,7 +16,8 @@ import { HomePageComponent } from './containers/home-page/home-page.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomePageComponent
+    HomePageComponent,
+    DashboardPageComponent
   ],
   imports: [
     BrowserModule,

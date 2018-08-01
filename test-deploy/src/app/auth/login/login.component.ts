@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   }
 
   onClickSignInButton() {
-    this.sharedService.routingToPage(PageName.HOME_PAGE);
+    this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
   }
 
 }
