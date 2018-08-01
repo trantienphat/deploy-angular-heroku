@@ -11,7 +11,6 @@ import { AppRoutingModule } from './/app-routing.module';
 import { SharedService } from './shared/services/shared.service';
 import { HomePageComponent } from './containers/home-page/home-page.component';
 import { DashboardPageComponent } from './containers/dashboard-page/dashboard-page.component';
-import { HeaderComponent } from './shared/component/header/header.component';
 
 
 
@@ -21,7 +20,6 @@ import { HeaderComponent } from './shared/component/header/header.component';
     LoginComponent,
     HomePageComponent,
     DashboardPageComponent,
-    HeaderComponent
   ],
   imports: [
     BrowserModule,

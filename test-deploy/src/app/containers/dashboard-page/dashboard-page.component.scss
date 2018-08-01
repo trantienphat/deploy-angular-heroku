@@ -13,6 +13,14 @@
     }
 }
 
+.dropdown-item {
+
+    &:hover {
+        cursor: pointer;
+        background-color: #f8f9fa;
+    }
+}
+
 .menu-button {
     
     &__label {
