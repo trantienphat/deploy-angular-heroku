@@ -36,7 +36,7 @@ export class DashboardPageComponent implements OnInit {
     this.sharedService.routingToPage(PageName.LISTING_STUDENT_PAGE);
   }
 
-  onClickListingRequisitions() {
+  onClickListingRequisitionsButton() {
     this.sharedService.routingToPage(PageName.LISTING_REQUISITION_PAGE);
   }
 
