@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardPageComponent implements OnInit {
 
+  public userName = 'Username';
+
   constructor() { }
 
   ngOnInit() {
