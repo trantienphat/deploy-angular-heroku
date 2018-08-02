@@ -15,6 +15,17 @@ import { ChangePasswordPageComponent } from './containers/change-password-page/c
 import { ListingTutorsPageComponent } from './containers/listing-tutors-page/listing-tutors-page.component';
 import { ListingStudentsPageComponent } from './containers/listing-students-page/listing-students-page.component';
 import { ListingRequisitionsPageComponent } from './containers/listing-requisitions-page/listing-requisitions-page.component';
+import { CardUserInfoComponent } from './shared/components/card-user-info/card-user-info.component';
+import { AuthorizationTypeService } from './shared/services/authorization-type.service';
+import { VerificationDocumentService } from './shared/services/verification-document.service';
+import { BannerService } from './shared/services/banner.service';
+import { DegreeService } from './shared/services/degree.service';
+import { HttpService } from './shared/services/http.service';
+import { RequisitionCourseService } from './shared/services/requisition-course.service';
+import { SpecializationService } from './shared/services/specialization.service';
+import { SubjectService } from './shared/services/subject.service';
+import { UserService } from './shared/services/user.service';
+import { VerificationDocumentTypeService } from './shared/services/verification-document-type.service';
 
 
 
@@ -27,7 +38,8 @@ import { ListingRequisitionsPageComponent } from './containers/listing-requisiti
     ChangePasswordPageComponent,
     ListingTutorsPageComponent,
     ListingStudentsPageComponent,
-    ListingRequisitionsPageComponent
+    ListingRequisitionsPageComponent,
+    CardUserInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +49,8 @@ import { ListingRequisitionsPageComponent } from './containers/listing-requisiti
     NgbModule.forRoot(),
     ReactiveFormsModule,
   ],
-  providers: [SharedService],
+  providers: [SharedService, AuthorizationTypeService, BannerService, DegreeService, HttpService, RequisitionCourseService,
+    SpecializationService, SubjectService, UserService, VerificationDocumentTypeService, VerificationDocumentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
