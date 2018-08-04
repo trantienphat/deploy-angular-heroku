@@ -12,10 +12,10 @@ export class AccountPageComponent implements OnInit {
 
   public user: any = '';
 
-  public userName = 'Username';
+  public userName = 'trantienphat1110@gmail.com';
 
   public userAvatar = '';
-  public defaultAvatar = '/assets/img/images_default_avatar.png';
+  public defaultAvatar = 'https://i.imgur.com/21O21RJ.jpg';
 
   constructor(private sharedService: SharedService) { }
 

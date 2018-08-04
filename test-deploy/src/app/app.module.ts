@@ -26,6 +26,7 @@ import { SpecializationService } from './shared/services/specialization.service'
 import { SubjectService } from './shared/services/subject.service';
 import { UserService } from './shared/services/user.service';
 import { VerificationDocumentTypeService } from './shared/services/verification-document-type.service';
+import { AuthService } from './auth/auth.service';
 
 
 
@@ -49,7 +50,7 @@ import { VerificationDocumentTypeService } from './shared/services/verification-
     NgbModule.forRoot(),
     ReactiveFormsModule,
   ],
-  providers: [SharedService, AuthorizationTypeService, BannerService, DegreeService, HttpService, RequisitionCourseService,
+  providers: [SharedService, AuthService, AuthorizationTypeService, BannerService, DegreeService, HttpService, RequisitionCourseService,
     SpecializationService, SubjectService, UserService, VerificationDocumentTypeService, VerificationDocumentService],
   bootstrap: [AppComponent]
 })

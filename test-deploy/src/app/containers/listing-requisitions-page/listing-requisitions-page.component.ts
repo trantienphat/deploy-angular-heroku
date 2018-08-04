@@ -15,7 +15,7 @@ export class ListingRequisitionsPageComponent implements OnInit {
 
   // public string = '{"response": [{"A":"A"},{"A":"A"},{"A":"A"}]}';
 
-  public userName = 'Username';
+  public userName = 'trantienphat1110@gmail.com';
 
   constructor(private sharedService: SharedService) { }
 

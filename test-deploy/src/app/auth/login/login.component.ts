@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../shared/services/shared.service';
 import { PageName } from '../../shared/constants/routing.constant';
+import { LoginRequestModel } from '../../shared/models/user.model';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +11,16 @@ import { PageName } from '../../shared/constants/routing.constant';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private sharedService: SharedService) { }
+  public loginRequest = new LoginRequestModel();
+
+  constructor(private sharedService: SharedService, private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   onClickSignInButton() {
-    this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
+    this.authService.login(this.loginRequest);
+    // this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
   }
 
 }

@@ -9,7 +9,7 @@ import { PageName } from '../../shared/constants/routing.constant';
 })
 export class ChangePasswordPageComponent implements OnInit {
 
-  public userName = 'Username';
+  public userName = 'trantienphat1110@gmail.com';
 
   constructor(private sharedService: SharedService) { }
 

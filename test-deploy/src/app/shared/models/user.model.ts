@@ -3,10 +3,11 @@ export class User {
 }
 
 export class LoginRequestModel {
-    public userName: string;
-    public passWord: string;
+    public email: string;
+    public password: string;
 }
 
 export class LoginResponseModel {
-
+    public status: string;
+    public id: string;
 }

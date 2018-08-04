@@ -9,7 +9,9 @@ import { SharedService } from '../../shared/services/shared.service';
 })
 export class ListingStudentsPageComponent implements OnInit {
 
-  public userName = 'Username';
+  public isStudent = true;
+
+  public userName = 'trantienphat1110@gmail.com';
 
   constructor(private sharedService: SharedService) { }
 
