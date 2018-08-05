@@ -30,6 +30,9 @@ import { VerificationDocumentTypeService } from './shared/services/verification-
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { DashboardService } from './containers/dashboard-page/dashboard.service';
+import { RequisitionDetailsComponent } from './containers/listing-requisitions-page/requisition-details/requisition-details.component';
+import { StudentDetailsComponent } from './containers/listing-students-page/student-details/student-details.component';
+import { TutorDetailsComponent } from './containers/listing-tutors-page/tutor-details/tutor-details.component';
 
 
 
@@ -43,7 +46,10 @@ import { DashboardService } from './containers/dashboard-page/dashboard.service'
     ListingTutorsPageComponent,
     ListingStudentsPageComponent,
     ListingRequisitionsPageComponent,
-    CardUserInfoComponent
+    CardUserInfoComponent,
+    RequisitionDetailsComponent,
+    StudentDetailsComponent,
+    TutorDetailsComponent
   ],
   imports: [
     BrowserModule,
