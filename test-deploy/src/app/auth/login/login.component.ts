@@ -14,8 +14,25 @@ export class LoginComponent implements OnInit {
 
   public loginRequest = new LoginRequestModel();
 
+  public redirectUrl = '';
+
   constructor(private sharedService: SharedService, private authService: AuthService) {
-   }
+    this.checkAccessPage();
+  }
+
+  checkAccessPage() {
+    if (!this.authService.checkAuthentication()) {
+      this.authService.logout();
+    } else {
+      this.redirectUrl = window.localStorage.getItem(CommonConstants.redirectUrl);
+      if (this.redirectUrl) {
+        this.sharedService.routingToPage(this.redirectUrl);
+      } else {
+        this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
+      }
+
+    }
+  }
 
   ngOnInit() {
   }

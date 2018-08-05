@@ -33,7 +33,9 @@ export class AuthService {
       if (res) {
         const response = JSON.stringify(res.body);
         window.localStorage.setItem(CommonConstants.user, response);
-        this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
+        if ( window.localStorage.getItem(CommonConstants.user) !== undefined) {
+          this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
+        }
       } else {
         console.log('LOXX');
       }
@@ -50,6 +52,7 @@ export class AuthService {
     // Code check is login
     const data = window.localStorage.getItem(CommonConstants.user);
     if ( data) {
+      console.log(data);
       return true;
     } else {
       return false;

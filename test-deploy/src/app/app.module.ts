@@ -27,6 +27,7 @@ import { SubjectService } from './shared/services/subject.service';
 import { UserService } from './shared/services/user.service';
 import { VerificationDocumentTypeService } from './shared/services/verification-document-type.service';
 import { AuthService } from './auth/auth.service';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 
 
@@ -50,8 +51,20 @@ import { AuthService } from './auth/auth.service';
     NgbModule.forRoot(),
     ReactiveFormsModule,
   ],
-  providers: [SharedService, AuthService, AuthorizationTypeService, BannerService, DegreeService, HttpService, RequisitionCourseService,
-    SpecializationService, SubjectService, UserService, VerificationDocumentTypeService, VerificationDocumentService],
+  providers: [
+    SharedService,
+    AuthService,
+    AuthGuardService,
+    AuthorizationTypeService,
+    BannerService,
+    DegreeService,
+    HttpService,
+    RequisitionCourseService,
+    SpecializationService,
+    SubjectService,
+    UserService,
+    VerificationDocumentTypeService,
+    VerificationDocumentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
