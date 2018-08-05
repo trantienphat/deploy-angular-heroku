@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-card-user-info',
@@ -8,8 +9,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardUserInfoComponent implements OnInit {
 
   @Input() isStudent;
+  @Input() user: User;
   public userAvatar = '';
-  public defaultAvatar = 'http://www.xaluan.com/images/news/Image/2015/10/25/thon-nu-xinh-nhu-bup-be-hinh-anh_5_ftmr.jpg';
+  public defaultAvatar = '/assets/img/images_default_avatar.png';
 
   constructor() { }
 
@@ -18,7 +20,7 @@ export class CardUserInfoComponent implements OnInit {
   }
 
   setUserAvatar() {
-    this.userAvatar = this.userAvatar ? this.userAvatar : this.defaultAvatar;
+    this.userAvatar = this.user.avatar ? this.user.avatar : this.defaultAvatar;
   }
 
 }

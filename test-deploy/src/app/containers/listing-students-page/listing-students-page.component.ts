@@ -23,6 +23,8 @@ export class ListingStudentsPageComponent implements OnInit {
    checkAccessPage() {
     if ( !this.authService.checkAuthentication()) {
       this.authService.logout();
+    } else {
+      this.initPage();
     }
   }
 

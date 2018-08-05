@@ -21,6 +21,8 @@ export class ListingTutorsPageComponent implements OnInit {
    checkAccessPage() {
     if ( !this.authService.checkAuthentication()) {
       this.authService.logout();
+    } else {
+      this.initPage();
     }
   }
 

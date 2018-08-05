@@ -27,6 +27,8 @@ export class ListingRequisitionsPageComponent implements OnInit {
   checkAccessPage() {
     if ( !this.authService.checkAuthentication()) {
       this.authService.logout();
+    } else {
+      this.initPage();
     }
   }
 
