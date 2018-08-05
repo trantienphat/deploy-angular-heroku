@@ -8,7 +8,7 @@
       <div ngbDropdown placement="bottom-right">
         <button class="menu-button border-0 bg-transparent text-white" ngbDropdownToggle>
           <span class="menu-button__label fa fas fa-user"></span>
-          {{userName}}
+          <span class="username-label text-truncate">{{userName}}</span>
           <i class="fa fas fa-caret-down ml-1"></i>
         </button>
         <div ngbDropdownMenu class="pop-menu border rounded-0">
@@ -33,85 +33,111 @@
     <div class="dashboard-content d-flex flex-column p-4 w-100 h-100">
       <p class="h2">THỐNG KÊ</p>
       <!-- Thống kê thành viên -->
-      <div class="card border-0 mt-2">
-        <div class="card-header bg-info">
-          <p class="h4 text-white">
-            <i class="fa fas fa-users"></i> Thống kê thành viên:
-          </p>
-        </div>
-        <div class="card-body border border-top-0">
-          <ul>
-            <li> Thành viên:
-              <span>
-                <b>{{dashboardInfo.total_member}} <span class="text-muted">người</span></b>
-              </span>
-            </li>
-            <li> Gia sư:
-              <span>
-                <b>{{dashboardInfo.total_tutor}} <span class="text-muted">người</span></b>
-              </span>
-            </li>
-            <li> Học viên: 
-              <span>
-                <b>{{dashboardInfo.total_student}} <span class="text-muted">người</span></b>
-              </span>
-            </li>
-            <li> Gia sư - Học viên: 
-              <span>
-                <b>{{dashboardInfo.total_both}} <span class="text-muted">người</span></b>
-              </span>
-            </li>
-            <li> Thành viên bị chặn: 
-              <span>
-                <b>{{dashboardInfo.total_banned}} <span class="text-muted">người</span></b>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <!-- Thống kê REQUISITION -->
-      <div class="card border-0 mt-4">
-        <div class="card-header bg-info">
-          <p class="h4 text-white">
-            <i class="fa fas fa-envelope"></i> Thống kê yêu cầu:
-          </p>
-        </div>
-        <div class="card-body border border-top-0">
-          <ul>
-            <li> Yêu cầu:
-              <span>
-                <b>{{dashboardInfo.total_requisition}} <span class="text-muted">yêu cầu</span></b>
-              </span>
-            </li>
-            <li> Yêu cầu đang chờ:
-              <span>
-                <b>{{dashboardInfo.total_requisition_wait}} <span class="text-muted">yêu cầu</span></b>
-              </span>
-            </li>
-            <li> Yêu cầu được chấp nhận: 
-              <span>
-                <b>{{dashboardInfo.total_requisition_agree}} <span class="text-muted">yêu cầu</span></b>
-              </span>
-            </li>
-            <li> Yêu cầu bị từ chối: 
-              <span>
-                <b>{{dashboardInfo.total_requisition_disagree}} <span class="text-muted">yêu cầu</span></b>
-              </span>
-            </li>
-            <li> Yêu cầu bị gia sư hủy: 
-              <span>
-                <b>{{dashboardInfo.total_requisition_cancel_by_tutor}} <span class="text-muted">yêu cầu</span></b>
-              </span>
-            </li>
-            <li> Yêu cầu bị học viên hủy: 
-              <span>
-                <b>{{dashboardInfo.total_requisition_cancel_by_student}} <span class="text-muted">yêu cầu</span></b>
-              </span>
-            </li>
-          </ul>
+      <div class="mt-2">
+        <div class="card border-0 w-100 h-100">
+          <div class="card-header bg-info">
+            <p class="h4 text-white">
+              <i class="fa fas fa-users"></i> Thống kê thành viên:
+            </p>
+          </div>
+          <div class="card-body border border-top-0">
+            <ul>
+              <li> Thành viên:
+                <span>
+                  <b>{{dashboardInfo.total_member}}
+                    <span class="text-muted">người</span>
+                  </b>
+                </span>
+              </li>
+              <li> Gia sư:
+                <span>
+                  <b>{{dashboardInfo.total_tutor}}
+                    <span class="text-muted">người</span>
+                  </b>
+                </span>
+              </li>
+              <li> Học viên:
+                <span>
+                  <b>{{dashboardInfo.total_student}}
+                    <span class="text-muted">người</span>
+                  </b>
+                </span>
+              </li>
+              <li> Gia sư - Học viên:
+                <span>
+                  <b>{{dashboardInfo.total_both}}
+                    <span class="text-muted">người</span>
+                  </b>
+                </span>
+              </li>
+              <li> Thành viên bị chặn:
+                <span>
+                  <b>{{dashboardInfo.total_banned}}
+                    <span class="text-muted">người</span>
+                  </b>
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
+      <!-- Thống kê REQUISITION -->
+      <div class="mt-4">
+        <div class="card border-0 w-100 h-100">
+          <div class="card-header bg-info">
+            <p class="h4 text-white">
+              <i class="fa fas fa-envelope"></i> Thống kê yêu cầu:
+            </p>
+          </div>
+          <div class="card-body border border-top-0">
+            <ul>
+              <li> Yêu cầu:
+                <span>
+                  <b>{{dashboardInfo.total_requisition}}
+                    <span class="text-muted">yêu cầu</span>
+                  </b>
+                </span>
+              </li>
+              <li> Yêu cầu đang chờ:
+                <span>
+                  <b>{{dashboardInfo.total_requisition_wait}}
+                    <span class="text-muted">yêu cầu</span>
+                  </b>
+                </span>
+              </li>
+              <li> Yêu cầu được chấp nhận:
+                <span>
+                  <b>{{dashboardInfo.total_requisition_agree}}
+                    <span class="text-muted">yêu cầu</span>
+                  </b>
+                </span>
+              </li>
+              <li> Yêu cầu bị từ chối:
+                <span>
+                  <b>{{dashboardInfo.total_requisition_disagree}}
+                    <span class="text-muted">yêu cầu</span>
+                  </b>
+                </span>
+              </li>
+              <li> Yêu cầu bị gia sư hủy:
+                <span>
+                  <b>{{dashboardInfo.total_requisition_cancel_by_tutor}}
+                    <span class="text-muted">yêu cầu</span>
+                  </b>
+                </span>
+              </li>
+              <li> Yêu cầu bị học viên hủy:
+                <span>
+                  <b>{{dashboardInfo.total_requisition_cancel_by_student}}
+                    <span class="text-muted">yêu cầu</span>
+                  </b>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- <div class="d-flex flex-row w-100 h-100">
