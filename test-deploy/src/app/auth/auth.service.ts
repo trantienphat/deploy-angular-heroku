@@ -42,6 +42,8 @@ export class AuthService {
 
   logout() {
     // Code here
+    window.localStorage.clear();
+    this.sharedService.routingToPage(PageName.LOGIN_PAGE);
   }
 
   checkAuthentication(): boolean {

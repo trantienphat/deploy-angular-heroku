@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../shared/services/shared.service';
 import { PageName } from '../../shared/constants/routing.constant';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-change-password-page',
@@ -11,7 +12,15 @@ export class ChangePasswordPageComponent implements OnInit {
 
   public userName = 'trantienphat1110@gmail.com';
 
-  constructor(private sharedService: SharedService) { }
+  constructor(private sharedService: SharedService, private authService: AuthService) {
+    this.checkAccessPage();
+   }
+
+  checkAccessPage() {
+    if ( !this.authService.checkAuthentication()) {
+      this.authService.logout();
+    }
+  }
 
   ngOnInit() {
   }
@@ -42,5 +51,6 @@ export class ChangePasswordPageComponent implements OnInit {
 
   onClickLogoutButton() {
     // Code here
+    this.authService.logout();
   }
 }

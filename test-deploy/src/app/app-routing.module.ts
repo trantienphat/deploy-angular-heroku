@@ -9,16 +9,17 @@ import { ChangePasswordPageComponent } from './containers/change-password-page/c
 import { ListingTutorsPageComponent } from './containers/listing-tutors-page/listing-tutors-page.component';
 import { ListingStudentsPageComponent } from './containers/listing-students-page/listing-students-page.component';
 import { ListingRequisitionsPageComponent } from './containers/listing-requisitions-page/listing-requisitions-page.component';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: PageName.LOGIN_PAGE, component: LoginComponent },
   { path: '', redirectTo: PageName.LOGIN_PAGE, pathMatch: 'full'},
-  { path: PageName.DASHBOARD_PAGE, component: DashboardPageComponent },
-  { path: PageName.ACCOUNT_PAGE, component: AccountPageComponent },
-  { path: PageName.CHANGE_PASSWORD_PAGE, component: ChangePasswordPageComponent },
-  { path: PageName.LISTING_TUTOR_PAGE, component: ListingTutorsPageComponent },
-  { path: PageName.LISTING_STUDENT_PAGE, component: ListingStudentsPageComponent },
-  { path: PageName.LISTING_REQUISITION_PAGE, component: ListingRequisitionsPageComponent }
+  { path: PageName.DASHBOARD_PAGE, component: DashboardPageComponent, canActivate: [AuthGuardService] },
+  { path: PageName.ACCOUNT_PAGE, component: AccountPageComponent, canActivate: [AuthGuardService] },
+  { path: PageName.CHANGE_PASSWORD_PAGE, component: ChangePasswordPageComponent, canActivate: [AuthGuardService] },
+  { path: PageName.LISTING_TUTOR_PAGE, component: ListingTutorsPageComponent, canActivate: [AuthGuardService] },
+  { path: PageName.LISTING_STUDENT_PAGE, component: ListingStudentsPageComponent, canActivate: [AuthGuardService] },
+  { path: PageName.LISTING_REQUISITION_PAGE, component: ListingRequisitionsPageComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({

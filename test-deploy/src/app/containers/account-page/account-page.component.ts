@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../shared/services/shared.service';
 import { PageName } from '../../shared/constants/routing.constant';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-account-page',
@@ -17,7 +18,15 @@ export class AccountPageComponent implements OnInit {
   public userAvatar = '';
   public defaultAvatar = 'https://i.imgur.com/21O21RJ.jpg';
 
-  constructor(private sharedService: SharedService) { }
+  constructor(private sharedService: SharedService, private authService: AuthService) { 
+    this.checkAccessPage();
+  }
+
+  checkAccessPage() {
+    if ( !this.authService.checkAuthentication()) {
+      this.authService.logout();
+    }
+  }
 
   ngOnInit() {
     this.setAvatarUser();
@@ -53,6 +62,7 @@ export class AccountPageComponent implements OnInit {
 
   onClickLogoutButton() {
     // Code here
+    this.authService.logout();
   }
 
 }

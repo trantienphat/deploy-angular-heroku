@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageName } from '../../shared/constants/routing.constant';
 import { SharedService } from '../../shared/services/shared.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-listing-students-page',
@@ -13,7 +14,15 @@ export class ListingStudentsPageComponent implements OnInit {
 
   public userName = 'trantienphat1110@gmail.com';
 
-  constructor(private sharedService: SharedService) { }
+  constructor(private sharedService: SharedService, private authService: AuthService) {
+    this.checkAccessPage();
+   }
+
+  checkAccessPage() {
+    if ( !this.authService.checkAuthentication()) {
+      this.authService.logout();
+    }
+  }
 
   ngOnInit() {
   }
@@ -44,6 +53,7 @@ export class ListingStudentsPageComponent implements OnInit {
 
   onClickLogoutButton() {
     // Code here
+    this.authService.logout();
   }
 
 }

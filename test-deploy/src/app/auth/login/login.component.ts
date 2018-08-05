@@ -3,6 +3,7 @@ import { SharedService } from '../../shared/services/shared.service';
 import { PageName } from '../../shared/constants/routing.constant';
 import { LoginRequestModel } from '../../shared/models/user.model';
 import { AuthService } from '../auth.service';
+import { CommonConstants } from '../../shared/constants/common.constant';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   public loginRequest = new LoginRequestModel();
 
-  constructor(private sharedService: SharedService, private authService: AuthService) { }
+  constructor(private sharedService: SharedService, private authService: AuthService) {
+   }
 
   ngOnInit() {
   }
