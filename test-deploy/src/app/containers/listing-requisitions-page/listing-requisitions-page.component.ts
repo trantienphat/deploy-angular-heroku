@@ -4,6 +4,9 @@ import { SharedService } from '../../shared/services/shared.service';
 import { AuthService } from '../../auth/auth.service';
 import { User } from '../../shared/models/user.model';
 import { CommonConstants } from '../../shared/constants/common.constant';
+import { RequisitionCourse } from '../../shared/models/requisition-course.model';
+import { RequisitionCourseService } from '../../shared/services/requisition-course.service';
+import { collectExternalReferences } from '@angular/compiler';
 
 @Component({
   selector: 'app-listing-requisitions-page',
@@ -12,15 +15,16 @@ import { CommonConstants } from '../../shared/constants/common.constant';
 })
 export class ListingRequisitionsPageComponent implements OnInit {
 
-  // public array = [];
 
-  // public count = 0;
+  public user = new User();
 
-  // public string = '{"response": [{"A":"A"},{"A":"A"},{"A":"A"}]}';
+  public arrayRequisition: Array<RequisitionCourse> = [];
+  public pageSize = 10;
+  public page = 1;
 
-  public user = new User();;
-
-  constructor(private sharedService: SharedService, private authService: AuthService) { 
+  constructor(private sharedService: SharedService,
+     private authService: AuthService,
+    private requisitionService: RequisitionCourseService) {
     this.checkAccessPage();
   }
 
@@ -38,9 +42,16 @@ export class ListingRequisitionsPageComponent implements OnInit {
       this.authService.logout();
     } else {
       this.user = _user;
+      this.getRequisitionsCourse();
     }
   }
 
+  getRequisitionsCourse() {
+    this.requisitionService.getRequistionCourse().subscribe(res => {
+      this.arrayRequisition = res;
+      console.log(this.arrayRequisition);
+    });
+  }
   ngOnInit() {
     // const x = JSON.parse(this.string);
     // this.array = x.response;
