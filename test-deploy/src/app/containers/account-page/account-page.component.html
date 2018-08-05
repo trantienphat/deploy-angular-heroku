@@ -8,7 +8,7 @@
       <div ngbDropdown placement="bottom-right">
         <button class="menu-button border-0 bg-transparent text-white" ngbDropdownToggle>
           <span class="menu-button__label fa fas fa-user"></span>
-          {{userName}}
+          {{user.email}}
           <i class="fa fas fa-caret-down ml-1"></i>
         </button>
         <div ngbDropdownMenu class="pop-menu border rounded-0">
@@ -30,8 +30,8 @@
       </div>
     </div>
 
-    <div class="account-page-content d-flex flex-column p-4 w-100 h-100">
-      <div class="card border-0 mt-2">
+    <div class="account-page-content d-flex flex-column p-4">
+      <div class="card border-0 mt-2 w-100 h-100">
         <div class="card-header bg-info">
           <p class="h3 text-white">
               <i class="fa fas fa-user-circle"></i> Thông tin tài khoản
@@ -40,16 +40,13 @@
         <div class="card-body border border-top-0 p-3">
           <div class="d-flex flex-column">
             <img class="img-thumbnail rounded mx-auto d-block mb-2  w-25" src="{{userAvatar}}">
-            <p>Học và tên: <b>Trần Tiến Phát</b> <i class="fa fas fa-check-circle text-success"></i></p>
-            <p>Giới tính: <b>Nam</b></p>
-            <p>Sinh nhật: <b>11-10-1996</b></p>
-            <p>Số điện thoại: <b>+84942960154</b></p>
-            <p>Skype: <b>trantienphat1110</b></p>
-            <p>Email: <b>trantienphat1110@gmail.com</b></p>
-            <!-- <p>Địa chỉ: <b>Bình Thạnh TPHCM</b></p> -->
-            <!-- <p>Nghề nghiệp: <b>Sinh viên</b></p> -->
-            <!-- <p>Trình độ: <b>Đại học</b></p> -->
-            <!-- <p>Loại thành viên: <b>Gia sư - Học viên</b></p> -->
+            <p>Họ và tên: <b>{{user.first_name}} {{user.last_name}}</b> <i class="fa fas fa-check-circle text-success" *ngIf="user.verification == 1"></i></p>
+            <p>Giới tính: <b *ngIf="user.sex == 1">Nam</b> <b *ngIf="user.sex == 0">Nữ</b></p>
+            <p>Sinh nhật: <b>{{user.birthday}}</b></p>
+            <p>Số điện thoại: <b>{{user.phone}}</b></p>
+            <p>Skype: <b>{{user.skype}}</b></p>
+            <p>Email: <b>{{user.email}}</b></p>
+            <p>Địa chỉ: <b>{{user.address}}</b></p>
           </div>
         </div>
       </div>

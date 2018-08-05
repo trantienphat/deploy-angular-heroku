@@ -22,12 +22,13 @@ export class DashboardPageComponent implements OnInit {
     private authService: AuthService,
     private dashboardService: DashboardService) {
     this.checkAccessPage();
-    this.initPage();
   }
 
   checkAccessPage() {
     if (!this.authService.checkAuthentication()) {
       this.authService.logout();
+    } else {
+      this.initPage();
     }
   }
 

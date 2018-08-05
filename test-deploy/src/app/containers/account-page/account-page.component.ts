@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../shared/services/shared.service';
 import { PageName } from '../../shared/constants/routing.constant';
 import { AuthService } from '../../auth/auth.service';
+import { User } from '../../shared/models/user.model';
+import { UserService } from '../../shared/services/user.service';
+import { CommonConstants } from '../../shared/constants/common.constant';
 
 @Component({
   selector: 'app-account-page',
@@ -11,21 +14,28 @@ import { AuthService } from '../../auth/auth.service';
 export class AccountPageComponent implements OnInit {
 
 
-  public user: any = '';
-
-  public userName = 'trantienphat1110@gmail.com';
+  public user = new User();
 
   public userAvatar = '';
   public defaultAvatar = 'https://i.imgur.com/21O21RJ.jpg';
 
-  constructor(private sharedService: SharedService, private authService: AuthService) { 
+  constructor(private sharedService: SharedService,
+     private authService: AuthService,
+    private userService: UserService) {
     this.checkAccessPage();
   }
 
   checkAccessPage() {
     if ( !this.authService.checkAuthentication()) {
       this.authService.logout();
+    } else {
+      this.initPage();
     }
+  }
+
+  initPage() {
+    const _user = JSON.parse(window.localStorage.getItem(CommonConstants.userInfo));
+    this.user = _user;
   }
 
   ngOnInit() {
@@ -33,7 +43,7 @@ export class AccountPageComponent implements OnInit {
   }
 
   setAvatarUser() {
-    this.userAvatar = this.user ? this.user : this.defaultAvatar;
+    this.userAvatar = this.user.avatar ? this.user.avatar : this.defaultAvatar;
   }
 
   onClickAccountButton() {

@@ -1,5 +1,6 @@
 export const CommonConstants = {
     redirectUrl: 'url',
-    user: 'user'
+    user: 'userId',
+    userInfo: 'userInfo'
 }
 

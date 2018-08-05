@@ -4,13 +4,17 @@ export default class HttpParamsHelper {
     public static parseObjectToHttpParams(data?: any) {
         let httpParams = new HttpParams();
         if (data) {
-            const request = new Request(data);
-            Object.keys(request).forEach(function (key) {
-                request[key].forEach(item => {
-                    httpParams = httpParams.append(key, item);
-                });
+            Object.keys(data).forEach(function (key) {
+                if (Array.isArray(data[key])) {
+                    data[key].forEach(item => {
+                        httpParams = httpParams.append(key, item);
+                    });
+                } else {
+                    httpParams = httpParams.append(key, data[key]);
+                }
             });
         }
 
+        return httpParams;
     }
 }

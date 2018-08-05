@@ -1,5 +1,17 @@
 export class User {
-
+    public id: string;
+    public avatar: string;
+    public first_name: string;
+    public last_name: string;
+    public sex: number;
+    public birthday: string;
+    public email: string;
+    public phone: string;
+    public skype: string;
+    public address: string;
+    public degree: number;
+    public verification: number;
+    public authorization: number;
 }
 
 export class LoginRequestModel {
@@ -9,5 +21,9 @@ export class LoginRequestModel {
 
 export class LoginResponseModel {
     public status: string;
+    public id: string;
+}
+
+export class GetUserInfoRequest {
     public id: string;
 }

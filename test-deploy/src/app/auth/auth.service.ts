@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginRequestModel } from '../shared/models/user.model';
+import { LoginRequestModel, GetUserInfoRequest } from '../shared/models/user.model';
 import { CommonConstants } from '../shared/constants/common.constant';
 import { HttpService } from '../shared/services/http.service';
 import { ApiUrl } from '../shared/constants/api-url.constant';
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../../environments/environment';
 import { SharedService } from '../shared/services/shared.service';
 import { PageName } from '../shared/constants/routing.constant';
+import { UserService } from '../shared/services/user.service';
 
 
 @Injectable()
@@ -17,7 +18,9 @@ export class AuthService {
 
   private base_uri = environment.BASE_URI;
 
-  constructor(private http: HttpService, private sharedService: SharedService) { }
+  constructor(private http: HttpService,
+     private sharedService: SharedService,
+    private userService: UserService) { }
 
   loginApi(request: LoginRequestModel): Observable<any> {
     // Code here
@@ -32,13 +35,25 @@ export class AuthService {
     this.loginApi(request).subscribe(res => {
       if (res) {
         const response = JSON.stringify(res.body);
-        window.localStorage.setItem(CommonConstants.user, response);
-        if ( window.localStorage.getItem(CommonConstants.user) !== undefined) {
-          this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
+        if ( response !== undefined) {
+          window.localStorage.setItem(CommonConstants.user, response);
+          this.getCurrentUserInfo(res.body.id);
         }
+
       } else {
         console.log('LOXX');
       }
+    });
+  }
+
+  getCurrentUserInfo(_id: string) {
+    const request: GetUserInfoRequest = {
+      id: _id
+    };
+    this.userService.getUserInfo(request).subscribe(res => {
+      const stringValue = JSON.stringify(res[0]);
+      window.localStorage.setItem(CommonConstants.userInfo, stringValue);
+      this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
     });
   }
 
@@ -52,7 +67,6 @@ export class AuthService {
     // Code check is login
     const data = window.localStorage.getItem(CommonConstants.user);
     if ( data) {
-      console.log(data);
       return true;
     } else {
       return false;
