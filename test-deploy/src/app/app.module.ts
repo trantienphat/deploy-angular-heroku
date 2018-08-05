@@ -28,6 +28,7 @@ import { UserService } from './shared/services/user.service';
 import { VerificationDocumentTypeService } from './shared/services/verification-document-type.service';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { DashboardService } from './containers/dashboard-page/dashboard.service';
 
 
 
@@ -64,7 +65,8 @@ import { AuthGuardService } from './auth/auth-guard.service';
     SubjectService,
     UserService,
     VerificationDocumentTypeService,
-    VerificationDocumentService],
+    VerificationDocumentService,
+    DashboardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,8 @@ import { PageName } from '../../shared/constants/routing.constant';
 import { CommonConstants } from '../../shared/constants/common.constant';
 import { AuthService } from '../../auth/auth.service';
 import { AuthGuardService } from '../../auth/auth-guard.service';
+import { DashboardService } from './dashboard.service';
+import { DashboardModel } from './dashboard.model';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -14,15 +16,25 @@ export class DashboardPageComponent implements OnInit {
 
   public userName = 'trantienphat1110@gmail.com';
 
-  constructor(private sharedService: SharedService, private authService: AuthService) {
-    // this.checkAccessPage();
-    console.log(this.authService.checkAuthentication());
-   }
+  public dashboardInfo = new DashboardModel();
 
-   checkAccessPage() {
-    if ( !this.authService.checkAuthentication()) {
+  constructor(private sharedService: SharedService,
+    private authService: AuthService,
+    private dashboardService: DashboardService) {
+    this.checkAccessPage();
+    this.initPage();
+  }
+
+  checkAccessPage() {
+    if (!this.authService.checkAuthentication()) {
       this.authService.logout();
     }
+  }
+
+  initPage() {
+    this.dashboardService.getDashboardInfo().subscribe(res => {
+      this.dashboardInfo = res;
+    });
   }
 
   ngOnInit() {
