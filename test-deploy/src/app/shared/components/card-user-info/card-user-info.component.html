@@ -9,7 +9,7 @@
         <img class="image-avatar img-thumbnail rounded mx-auto d-block mb-2 w-100 h-100" src="{{userAvatar}}">
     </div>
     <div class="d-flex flex-column w-75">
-        <p>Họ và tên: <b>{{user.first_name}} {{user.last_name}}</b> <i *ngIf="user.verification == 1"class="fa fas fa-check-circle text-success"></i></p>
+        <p>Họ và tên: <b>{{user.last_name}} {{user.first_name}} </b> <i *ngIf="user.verification == 1"class="fa fas fa-check-circle text-success"></i></p>
         <p>Giới tính: <b *ngIf="user.sex == 0">Nữ</b><b *ngIf="user.sex == 1">Nam</b></p>
         <p>Sinh nhật: <b>{{user.birthday}}</b></p>
         <p>Số điện thoại: <b>{{user.phone}}</b></p>
