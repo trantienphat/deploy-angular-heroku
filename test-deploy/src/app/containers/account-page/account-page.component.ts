@@ -35,7 +35,11 @@ export class AccountPageComponent implements OnInit {
 
   initPage() {
     const _user = JSON.parse(window.localStorage.getItem(CommonConstants.userInfo));
-    this.user = _user;
+    if ( !_user) {
+      this.authService.logout();
+    } else {
+      this.user = _user;
+    }
   }
 
   ngOnInit() {

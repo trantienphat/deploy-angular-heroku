@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../shared/services/shared.service';
 import { PageName } from '../../shared/constants/routing.constant';
 import { AuthService } from '../../auth/auth.service';
+import { User } from '../../shared/models/user.model';
+import { CommonConstants } from '../../shared/constants/common.constant';
 
 @Component({
   selector: 'app-change-password-page',
@@ -10,7 +12,7 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class ChangePasswordPageComponent implements OnInit {
 
-  public userName = 'trantienphat1110@gmail.com';
+  public user = new User();
 
   constructor(private sharedService: SharedService, private authService: AuthService) {
     this.checkAccessPage();
@@ -19,6 +21,15 @@ export class ChangePasswordPageComponent implements OnInit {
   checkAccessPage() {
     if ( !this.authService.checkAuthentication()) {
       this.authService.logout();
+    }
+  }
+
+  initPage() {
+    const _user = JSON.parse(window.localStorage.getItem(CommonConstants.userInfo));
+    if ( !_user) {
+      this.authService.logout();
+    } else {
+      this.user = _user;
     }
   }
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PageName } from '../../shared/constants/routing.constant';
 import { SharedService } from '../../shared/services/shared.service';
 import { AuthService } from '../../auth/auth.service';
+import { User } from '../../shared/models/user.model';
+import { CommonConstants } from '../../shared/constants/common.constant';
 
 @Component({
   selector: 'app-listing-students-page',
@@ -12,15 +14,24 @@ export class ListingStudentsPageComponent implements OnInit {
 
   public isStudent = true;
 
-  public userName = 'trantienphat1110@gmail.com';
+  public user = new User();
 
   constructor(private sharedService: SharedService, private authService: AuthService) {
     this.checkAccessPage();
    }
 
-  checkAccessPage() {
+   checkAccessPage() {
     if ( !this.authService.checkAuthentication()) {
       this.authService.logout();
+    }
+  }
+
+  initPage() {
+    const _user = JSON.parse(window.localStorage.getItem(CommonConstants.userInfo));
+    if ( !_user) {
+      this.authService.logout();
+    } else {
+      this.user = _user;
     }
   }
 

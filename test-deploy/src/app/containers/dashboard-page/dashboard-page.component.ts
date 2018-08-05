@@ -6,6 +6,7 @@ import { AuthService } from '../../auth/auth.service';
 import { AuthGuardService } from '../../auth/auth-guard.service';
 import { DashboardService } from './dashboard.service';
 import { DashboardModel } from './dashboard.model';
+import { User } from '../../shared/models/user.model';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -14,7 +15,7 @@ import { DashboardModel } from './dashboard.model';
 })
 export class DashboardPageComponent implements OnInit {
 
-  public userName = 'trantienphat1110@gmail.com';
+  public user = new User();
 
   public dashboardInfo = new DashboardModel();
 
@@ -35,6 +36,8 @@ export class DashboardPageComponent implements OnInit {
   initPage() {
     this.dashboardService.getDashboardInfo().subscribe(res => {
       this.dashboardInfo = res;
+      const _user = JSON.parse(window.localStorage.getItem(CommonConstants.userInfo));
+      this.user = _user;
     });
   }
 
