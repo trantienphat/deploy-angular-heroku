@@ -27,3 +27,7 @@ export class LoginResponseModel {
 export class GetUserInfoRequest {
     public id: string;
 }
+
+export class GetUserByAuth {
+    public authorization: string;
+}

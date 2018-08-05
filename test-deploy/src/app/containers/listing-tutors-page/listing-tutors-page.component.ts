@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../shared/services/shared.service';
 import { PageName } from '../../shared/constants/routing.constant';
 import { AuthService } from '../../auth/auth.service';
-import { User } from '../../shared/models/user.model';
+import { User, GetUserByAuth } from '../../shared/models/user.model';
 import { CommonConstants } from '../../shared/constants/common.constant';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-listing-tutors-page',
@@ -13,8 +14,15 @@ import { CommonConstants } from '../../shared/constants/common.constant';
 export class ListingTutorsPageComponent implements OnInit {
 
   public user = new User();
+  public arrayTutor: Array<User> = [];
 
-  constructor(private sharedService: SharedService, private authService: AuthService) {
+  public isStudent = false;
+
+  public pageSize = 10;
+  public page = 1;
+  constructor(private sharedService: SharedService,
+     private authService: AuthService,
+    private userService: UserService) {
     this.checkAccessPage();
    }
 
@@ -32,7 +40,18 @@ export class ListingTutorsPageComponent implements OnInit {
       this.authService.logout();
     } else {
       this.user = _user;
+      this.getArrayTutor();
     }
+  }
+
+  getArrayTutor() {
+    const typeAuthTutor = '2';
+    const request: GetUserByAuth = {
+      authorization: typeAuthTutor
+    };
+    this.userService.getUserByAuth(request).subscribe(res => {
+      this.arrayTutor = res;
+    });
   }
 
   ngOnInit() {

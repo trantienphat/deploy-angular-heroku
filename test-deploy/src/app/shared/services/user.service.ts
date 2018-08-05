@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { GetUserInfoRequest } from '../models/user.model';
+import { GetUserInfoRequest, GetUserByAuth } from '../models/user.model';
 import { environment } from '../../../environments/environment';
 import { ApiUrl } from '../constants/api-url.constant';
 import HttpParamsHelper from '../helper/http-param.helper';
@@ -15,6 +15,11 @@ export class UserService {
 
   public getUserInfo(request: GetUserInfoRequest): Observable<any> {
     const apiUrl = `${this.base_uri}${ApiUrl.GET_USER_INFO_API}`;
+    return this.http.get(apiUrl, { params: HttpParamsHelper.parseObjectToHttpParams(request) });
+  }
+
+  public getUserByAuth(request: GetUserByAuth): Observable<any> {
+    const apiUrl = `${this.base_uri}${ApiUrl.GET_USER_BY_AUTH}`;
     return this.http.get(apiUrl, { params: HttpParamsHelper.parseObjectToHttpParams(request) });
   }
 }

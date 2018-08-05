@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 import { AppComponent } from './app.component';
@@ -51,6 +52,7 @@ import { DashboardService } from './containers/dashboard-page/dashboard.service'
     HttpClientModule,
     NgbModule.forRoot(),
     ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [
     SharedService,
