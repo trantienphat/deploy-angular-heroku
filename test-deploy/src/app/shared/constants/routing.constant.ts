@@ -6,4 +6,7 @@ export class PageName {
     public static LISTING_TUTOR_PAGE = 'listingtutor';
     public static LISTING_STUDENT_PAGE = 'listingstudent';
     public static LISTING_REQUISITION_PAGE = 'listingrequisition';
+
+    // CHILD PAGE
+    public static DETAILS_REQUISITION_COURSE_PAGE = 'requisitioncourse';
 }

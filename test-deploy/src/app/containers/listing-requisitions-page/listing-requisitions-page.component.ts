@@ -88,4 +88,11 @@ export class ListingRequisitionsPageComponent implements OnInit {
     this.authService.logout();
   }
 
+  onClickDetailsButton(_id: string) {
+    const paramRouting = {
+      id: _id
+    };
+    this.sharedService.routingToPageWithParam(PageName.DETAILS_REQUISITION_COURSE_PAGE, paramRouting);
+  }
+
 }

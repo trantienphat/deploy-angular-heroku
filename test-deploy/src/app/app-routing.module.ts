@@ -10,6 +10,7 @@ import { ListingTutorsPageComponent } from './containers/listing-tutors-page/lis
 import { ListingStudentsPageComponent } from './containers/listing-students-page/listing-students-page.component';
 import { ListingRequisitionsPageComponent } from './containers/listing-requisitions-page/listing-requisitions-page.component';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { RequisitionDetailsComponent } from './containers/listing-requisitions-page/requisition-details/requisition-details.component';
 
 const appRoutes: Routes = [
   { path: PageName.LOGIN_PAGE, component: LoginComponent },
@@ -19,7 +20,9 @@ const appRoutes: Routes = [
   { path: PageName.CHANGE_PASSWORD_PAGE, component: ChangePasswordPageComponent, canActivate: [AuthGuardService] },
   { path: PageName.LISTING_TUTOR_PAGE, component: ListingTutorsPageComponent, canActivate: [AuthGuardService] },
   { path: PageName.LISTING_STUDENT_PAGE, component: ListingStudentsPageComponent, canActivate: [AuthGuardService] },
-  { path: PageName.LISTING_REQUISITION_PAGE, component: ListingRequisitionsPageComponent, canActivate: [AuthGuardService] }
+  { path: PageName.LISTING_REQUISITION_PAGE, component: ListingRequisitionsPageComponent, canActivate: [AuthGuardService] },
+  { path: PageName.DETAILS_REQUISITION_COURSE_PAGE, component: RequisitionDetailsComponent, canActivate: [AuthGuardService] },
+  { path: PageName.DETAILS_REQUISITION_COURSE_PAGE + '/:id', component: RequisitionDetailsComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({

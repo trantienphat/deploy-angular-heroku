@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-requisition-details',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequisitionDetailsComponent implements OnInit {
 
-  constructor() { }
+  public id = '';
+
+  constructor(private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.queryParams.subscribe(param => {
+      this.id = param.id;
+    });
+  }
 
   ngOnInit() {
   }

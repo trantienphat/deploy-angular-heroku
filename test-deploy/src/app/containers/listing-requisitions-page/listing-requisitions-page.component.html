@@ -55,7 +55,7 @@
                 <span *ngIf="item.status == 3" class="text-warning">Gia sư hủy</span>
                 <span *ngIf="item.status == 4" class="text-warning">Học viên hủy</span>
               </td>
-              <td class="text-info">Chi tiết</td>
+              <td class="text-info"><a (click)="onClickDetailsButton(item.id)">Chi tiết</a></td>
             </tr>
           </tbody>
         </table>
