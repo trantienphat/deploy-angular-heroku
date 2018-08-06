@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  BASE_URI: 'https://ewayseducation.000webhostapp.com'
+  BASE_URI: 'http://ewayseducation.hostingerapp.com'
 };
