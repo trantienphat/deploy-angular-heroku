@@ -41,12 +41,7 @@ export class HttpService {
   }
 
   public postFormData(url: string, formData: FormData, options?: any): Observable<any> {
-    // if (!options.headers) {
-    //   const headers = new HttpHeaders({'Content-Type': 'application/form-data' });
-    //   options.headers = headers;
-    // }
     options = this.setDefaultOptions(options);
-    // options.headers = null;
     const uploadReq = new HttpRequest('POST', url, formData, options);
     return this.httpClient.request(uploadReq);
 }
