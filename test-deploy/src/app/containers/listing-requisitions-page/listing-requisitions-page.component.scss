@@ -47,3 +47,11 @@
 .paging {
     background: rgba(0, 0, 0, 0.2);
 }
+
+.details-button {
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
