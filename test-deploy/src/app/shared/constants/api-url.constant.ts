@@ -7,4 +7,5 @@ export class ApiUrl {
     public static GET_USER_BY_AUTH = '/api/user/getusersbyauth.php';
     // REQUISITION
     public static GET_REQUISITIONS_API = '/api/requisitioncourse/getrequisitioncourses.php';
+    public static GET_REQUISITIONS_BY_ID_API = '/api/requisitioncourse/getrequisitioncoursebyid.php';
 }

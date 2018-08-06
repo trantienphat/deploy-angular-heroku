@@ -1,5 +1,5 @@
-<div class="account-page">
-  <div class="accont-container">
+<div class="requisition-details-page">
+  <div class="requisition-details-container">
 
     <div class="header-cover align-self-start d-flex flex-row bg-dark justify-content-center align-items-center p-2">
       <div class="title d-flex flex-row flex-grow-1 ml-2 h3 text-white">
@@ -30,14 +30,31 @@
       </div>
     </div>
 
-    <div class="account-page-content d-flex flex-column p-4">
-      <div class="card border-0 mt-2 w-100 h-100">
+    <div class="account-page-content d-flex flex-column p-4 w-100 h-100">
+      <div class="card border-0 mt-2 w-100">
         <div class="card-header bg-info">
           <p class="h3 text-white">
-              <i class="fa fas fa-user-circle"></i>
+              <i class="fa fas fa-envelope"></i> {{requisitionCourse.id}}
           </p>
         </div>
-        <div class="card-body border border-top-0 p-3">
+        <div class="card-body border border-top-0 p-3 d-flex flex-column w-100">
+          <p><b>Họ và tên học viên:</b> {{requisitionCourse.student_last_name}} {{requisitionCourse.student_first_name}}</p>
+          <p><b>Họ và tên gia sư:</b> {{requisitionCourse.tutor_last_name}} {{requisitionCourse.tutor_first_name}}</p>
+          <p><b>Môn học:</b> {{requisitionCourse.subject_name}}</p>
+          <p><b>Học phí:</b> {{requisitionCourse.tuition}}/Buổi</p>
+          <p><b>Lịch học:</b> {{requisitionCourse.schedule}}</p>
+          <p><b>Tổng số tiết học:</b> {{requisitionCourse.total_session}}</p>
+          <p><b>Thời lượng tiết học:</b> {{requisitionCourse.time_session}} phút</p>
+          <p><b>Ngày gửi:</b> {{requisitionCourse.sent_date}}</p>
+          <p><b>Trạng thái:</b> 
+            <span *ngIf="requisitionCourse.status == 0">Đang chờ</span>
+            <span *ngIf="requisitionCourse.status == 1" class="text-success">Đã chấp nhận</span>
+            <span *ngIf="requisitionCourse.status == 2" class="text-danger">Đã từ chối</span>
+            <span *ngIf="requisitionCourse.status == 3" class="text-warning">Gia sư hủy</span>
+            <span *ngIf="requisitionCourse.status == 4" class="text-warning">Học viên hủy</span>
+          </p>
+          <p><b>Mô tả yêu cầu:</b> {{requisitionCourse.description || 'Không có mô tả'}}</p>
+          <p *ngIf="requisitionCourse.comment"><b>Lý do:</b> {{requisitionCourse.comment}}</p>
         </div>
       </div>
     </div>

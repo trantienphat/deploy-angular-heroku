@@ -6,6 +6,7 @@ import { RequisitionCourseService } from '../../../shared/services/requisition-c
 import { User } from '../../../shared/models/user.model';
 import { CommonConstants } from '../../../shared/constants/common.constant';
 import { PageName } from '../../../shared/constants/routing.constant';
+import { RequestRequisitionById, RequisitionCourse, ResponseRequisitionById } from '../../../shared/models/requisition-course.model';
 
 @Component({
   selector: 'app-requisition-details',
@@ -16,6 +17,7 @@ export class RequisitionDetailsComponent implements OnInit {
 
   public id = '';
   public user = new User();
+  public requisitionCourse = new ResponseRequisitionById();
 
   constructor(private activatedRoute: ActivatedRoute,
     private sharedService: SharedService,
@@ -42,13 +44,18 @@ export class RequisitionDetailsComponent implements OnInit {
       this.user = _user;
       this.activatedRoute.queryParams.subscribe(param => {
         this.id = param.id;
+        this.getRequisitionsCourseById(this.id);
       });
-      this.getRequisitionsCourseById();
     }
   }
 
-  getRequisitionsCourseById() {
-
+  getRequisitionsCourseById(_id: string) {
+    const request: RequestRequisitionById = {
+      id: _id
+    };
+    this.requisitionService.getRequisitionCourseById(request).subscribe(res => {
+      this.requisitionCourse = res[0];
+    });
   }
 
   ngOnInit() {
