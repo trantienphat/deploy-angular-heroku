@@ -5,6 +5,7 @@ import { AuthService } from '../../../auth/auth.service';
 import { RequisitionCourseService } from '../../../shared/services/requisition-course.service';
 import { User } from '../../../shared/models/user.model';
 import { CommonConstants } from '../../../shared/constants/common.constant';
+import { PageName } from '../../../shared/constants/routing.constant';
 
 @Component({
   selector: 'app-requisition-details',
@@ -51,6 +52,35 @@ export class RequisitionDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onClickAccountButton() {
+    this.sharedService.routingToPage(PageName.ACCOUNT_PAGE);
+  }
+
+  onClickChangePasswordButton() {
+    this.sharedService.routingToPage(PageName.CHANGE_PASSWORD_PAGE);
+  }
+
+  onClickDashboardButton() {
+    this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
+  }
+
+  onClickListingTutorsButton() {
+    this.sharedService.routingToPage(PageName.LISTING_TUTOR_PAGE);
+  }
+
+  onClickListingStudentsButton() {
+    this.sharedService.routingToPage(PageName.LISTING_STUDENT_PAGE);
+  }
+
+  onClickListingRequisitionsButton() {
+    this.sharedService.routingToPage(PageName.LISTING_REQUISITION_PAGE);
+  }
+
+  onClickLogoutButton() {
+    // Code here
+    this.authService.logout();
   }
 
 }
