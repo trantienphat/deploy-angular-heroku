@@ -49,11 +49,11 @@
               <td>{{item.subject_name}}</td>
               <td>{{item.tuition}}/Buổi</td>
               <td>
-                <span *ngIf="item.status == 0">Đang chờ</span>
-                <span *ngIf="item.status == 1" class="text-success">Đã chấp nhận</span>
-                <span *ngIf="item.status == 2" class="text-danger">Đã từ chối</span>
-                <span *ngIf="item.status == 3" class="text-warning">Gia sư hủy</span>
-                <span *ngIf="item.status == 4" class="text-warning">Học viên hủy</span>
+                <span *ngIf="item.status == '0'">Đang chờ</span>
+                <span *ngIf="item.status == '1'" class="text-success">Đã chấp nhận</span>
+                <span *ngIf="item.status == '2'" class="text-danger">Đã từ chối</span>
+                <span *ngIf="item.status == '3'" class="text-warning">Gia sư hủy</span>
+                <span *ngIf="item.status == '4'" class="text-warning">Học viên hủy</span>
               </td>
               <td class="details-button text-info"><a (click)="onClickDetailsButton(item.id)">Chi tiết</a></td>
             </tr>

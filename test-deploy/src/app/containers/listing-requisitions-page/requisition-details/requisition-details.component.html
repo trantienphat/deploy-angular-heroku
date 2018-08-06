@@ -47,11 +47,11 @@
           <p><b>Thời lượng tiết học:</b> {{requisitionCourse.time_session}} phút</p>
           <p><b>Ngày gửi:</b> {{requisitionCourse.sent_date}}</p>
           <p><b>Trạng thái:</b> 
-            <span *ngIf="requisitionCourse.status === '0'">Đang chờ</span>
-            <span *ngIf="requisitionCourse.status === '1'" class="text-success">Đã chấp nhận</span>
-            <span *ngIf="requisitionCourse.status === '2'" class="text-danger">Đã từ chối</span>
-            <span *ngIf="requisitionCourse.status === '3'" class="text-warning">Gia sư hủy</span>
-            <span *ngIf="requisitionCourse.status === '4'" class="text-warning">Học viên hủy</span>
+            <span *ngIf="requisitionCourse.status == '0'">Đang chờ</span>
+            <span *ngIf="requisitionCourse.status == '1'" class="text-success">Đã chấp nhận</span>
+            <span *ngIf="requisitionCourse.status == '2'" class="text-danger">Đã từ chối</span>
+            <span *ngIf="requisitionCourse.status == '3'" class="text-warning">Gia sư hủy</span>
+            <span *ngIf="requisitionCourse.status == '4'" class="text-warning">Học viên hủy</span>
           </p>
           <p><b>Mô tả yêu cầu:</b> {{requisitionCourse.description || 'Không có mô tả'}}</p>
           <p *ngIf="requisitionCourse.comment"><b>Lý do:</b> {{requisitionCourse.comment}}</p>
