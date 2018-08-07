@@ -17,7 +17,7 @@ export class AccountPageComponent implements OnInit {
   public user = new User();
 
   public userAvatar = '';
-  public defaultAvatar = 'https://i.imgur.com/21O21RJ.jpg';
+  public defaultAvatar = '/assets/img/images_default_avatar.png';
 
   constructor(private sharedService: SharedService,
      private authService: AuthService,

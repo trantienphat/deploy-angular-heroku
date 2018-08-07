@@ -1,3 +1,56 @@
-<p>
-  tutor-details works!
-</p>
+<div class="tutor-details-page">
+  <div class="tutor-details-container">
+
+    <div class="header-cover align-self-start d-flex flex-row bg-dark justify-content-center align-items-center p-2">
+      <div class="title d-flex flex-row flex-grow-1 ml-2 h3 text-white">
+        Eways
+      </div>
+      <div ngbDropdown placement="bottom-right">
+        <button class="menu-button border-0 bg-transparent text-white" ngbDropdownToggle>
+          <span class="menu-button__label fa fas fa-user"></span>
+          {{user.email}}
+          <i class="fa fas fa-caret-down ml-1"></i>
+        </button>
+        <div ngbDropdownMenu class="pop-menu border rounded-0">
+          <button class="dropdown-item" (click)="onClickAccountButton()">
+            <i class="fa fas fa-user-circle"></i> Tài khoản</button>
+          <button class="dropdown-item" (click)="onClickChangePasswordButton()">
+            <i class="fa fas fa-key"></i> Đổi mật khẩu</button>
+          <button class="dropdown-item" (click)="onClickDashboardButton()">
+            <i class="fa fas fa-address-card"></i> Thống kê</button>
+          <button class="dropdown-item" (click)="onClickListingTutorsButton()">
+            <i class="fa fas fa-list-alt"></i> Danh sách gia sư</button>
+          <button class="dropdown-item" (click)="onClickListingStudentsButton()">
+            <i class="fa far fa-list-alt"></i> Danh sách học viên</button>
+          <button class="dropdown-item" (click)="onClickListingRequisitionsButton()">
+            <i class="fa far fa-list-alt"></i> Danh sách yêu cầu</button>
+          <button class="dropdown-item" (click)="onClickLogoutButton()">
+            <i class="fa fas fa-power-off"></i> Đăng xuất</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tutor-details-content d-flex flex-column p-4">
+      <div class="card border-0 mt-2 w-100 h-100">
+        <div class="card-header bg-info">
+          <p class="h3 text-white">
+              <i class="fa fas fa-user-circle"></i> {{tutor.id}}
+          </p>
+        </div>
+        <div class="card-body border border-top-0 p-3">
+          <div class="d-flex flex-column">
+            <img class="img-thumbnail rounded mx-auto d-block mb-2  w-25" src="{{tutorAvatar}}">
+            <p>Họ và tên: <b>{{tutor.first_name}} {{tutor.last_name}}</b> <i class="fa fas fa-check-circle text-success" *ngIf="tutor.verification == 1"></i></p>
+            <p>Giới tính: <b *ngIf="tutor.sex == 1">Nam</b> <b *ngIf="tutor.sex == 0">Nữ</b></p>
+            <p>Sinh nhật: <b>{{tutor.birthday}}</b></p>
+            <p>Số điện thoại: <b>{{tutor.phone}}</b></p>
+            <p>Skype: <b>{{tutor.skype}}</b></p>
+            <p>Email: <b>{{tutor.email}}</b></p>
+            <p>Địa chỉ: <b>{{tutor.address}}</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

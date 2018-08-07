@@ -18,6 +18,9 @@ export class StudentDetailsComponent implements OnInit {
   public user = new User(); // Current Admin login
   public student = new User();
 
+  public studentAvatar = '';
+  public defaultAvatar = '/assets/img/images_default_avatar.png';
+
   constructor(private sharedService: SharedService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
@@ -51,13 +54,16 @@ export class StudentDetailsComponent implements OnInit {
       id: _id
     };
     this.userService.getUserInfo(request).subscribe(res => {
-      // this.student = res[0];
-      console.log(res[0]);
+      this.student = res[0];
+      this.setAvatarStudent();
     });
   }
 
   ngOnInit() {
-    console.log(this.student);
+  }
+
+  setAvatarStudent() {
+    this.studentAvatar = this.student.avatar ? this.student.avatar : this.defaultAvatar;
   }
 
   onClickAccountButton() {
