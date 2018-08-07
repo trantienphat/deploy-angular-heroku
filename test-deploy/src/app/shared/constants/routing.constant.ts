@@ -9,4 +9,6 @@ export class PageName {
 
     // CHILD PAGE
     public static DETAILS_REQUISITION_COURSE_PAGE = 'requisitioncourse';
+    public static DETAILS_STUDENT_INFO_PAGE = 'student';
+    public static DETAILS_TUTOR_INFO_PAGE = 'tutor';
 }

@@ -33,7 +33,6 @@ import { DashboardService } from './containers/dashboard-page/dashboard.service'
 import { RequisitionDetailsComponent } from './containers/listing-requisitions-page/requisition-details/requisition-details.component';
 import { StudentDetailsComponent } from './containers/listing-students-page/student-details/student-details.component';
 import { TutorDetailsComponent } from './containers/listing-tutors-page/tutor-details/tutor-details.component';
-import { DetailsUserInfoComponent } from './shared/components/details-user-info/details-user-info.component';
 
 
 
@@ -50,8 +49,7 @@ import { DetailsUserInfoComponent } from './shared/components/details-user-info/
     CardUserInfoComponent,
     RequisitionDetailsComponent,
     StudentDetailsComponent,
-    TutorDetailsComponent,
-    DetailsUserInfoComponent
+    TutorDetailsComponent
   ],
   imports: [
     BrowserModule,
