@@ -5,3 +5,53 @@
     overflow: auto;
     background: #fff url(/assets/img/bokeh-2152298_960_720.jpg) repeat scroll;
 }
+
+.requisition-details-container {
+    width: 100%;
+    height: 100%;
+}
+
+.dropdown-item {
+
+    &:hover {
+        cursor: pointer;
+        background-color: #f8f9fa;
+    }
+}
+
+.menu-button {
+    
+    &__label {
+        cursor: pointer;
+    }
+
+    &::after {
+        content: unset !important;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+}
+
+.header-cover {
+    width: 100%;
+    height: 50px;
+}
+
+.table {
+    background-color: #fff;
+}
+
+.paging {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.details-button {
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
