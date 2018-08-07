@@ -11,16 +11,20 @@ import { environment } from '../../environments/environment';
 import { SharedService } from '../shared/services/shared.service';
 import { PageName } from '../shared/constants/routing.constant';
 import { UserService } from '../shared/services/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 
 
 @Injectable()
 export class AuthService {
 
   private base_uri = environment.BASE_URI;
+  public loginSubcription = new Subject<any>();
 
   constructor(private http: HttpService,
      private sharedService: SharedService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private toast: ToastrService) { }
 
   loginApi(request: LoginRequestModel): Observable<any> {
     // Code here
@@ -32,28 +36,18 @@ export class AuthService {
   }
 
   login(request: LoginRequestModel) {
-    this.loginApi(request).subscribe(res => {
+    this.loginApi(request).subscribe((res) => {
       if (res) {
         const response = JSON.stringify(res.body);
         if ( response !== undefined) {
           window.localStorage.setItem(CommonConstants.user, response);
-          this.getCurrentUserInfo(res.body.id);
+          this.loginSubcription.next();
         }
-
       } else {
-        console.log('LOXX');
+        this.toast.error('Sai tài khoản hoặc mật khẩu');
       }
-    });
-  }
-
-  getCurrentUserInfo(_id: string) {
-    const request: GetUserInfoRequest = {
-      id: _id
-    };
-    this.userService.getUserInfo(request).subscribe(res => {
-      const stringValue = JSON.stringify(res[0]);
-      window.localStorage.setItem(CommonConstants.userInfo, stringValue);
-      this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
+    }, error => {
+      this.toast.error('Sai tài khoản hoặc mật khẩu');
     });
   }
 

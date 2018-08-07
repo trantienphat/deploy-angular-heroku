@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 import { AppComponent } from './app.component';
@@ -58,7 +60,16 @@ import { TutorDetailsComponent } from './containers/listing-tutors-page/tutor-de
     HttpClientModule,
     NgbModule.forRoot(),
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      closeButton: true,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+      maxOpened: 3,
+      progressBar: true
+    })
   ],
   providers: [
     SharedService,
