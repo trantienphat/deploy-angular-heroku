@@ -13,7 +13,7 @@ export class HttpService {
       const headers = new HttpHeaders(
         { 'Content-Type': 'application/form-data' });
       options.headers = headers;
-        options.headers = null;
+      options.headers = null;
     }
     return options;
   }
@@ -44,5 +44,5 @@ export class HttpService {
     options = this.setDefaultOptions(options);
     const uploadReq = new HttpRequest('POST', url, formData, options);
     return this.httpClient.request(uploadReq);
-}
+  }
 }
