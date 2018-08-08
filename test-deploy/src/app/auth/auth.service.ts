@@ -58,7 +58,7 @@ export class AuthService {
 
   checkAuthentication(): boolean {
     const data: LoginResponseModel = this.sharedService.getLocalStorage(CommonConstants.user);
-    if ( data.status === '1') {
+    if (data && data.status === '1') {
       return true;
     } else {
       return false;

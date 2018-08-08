@@ -43,7 +43,7 @@
           <p><b>Môn học:</b> {{requisitionCourse.subject_name}}</p>
           <p><b>Học phí:</b> {{requisitionCourse.tuition}}/Buổi</p>
           <p><b>Lịch học:</b> {{requisitionCourse.schedule}}</p>
-          <p><b>Tổng số tiết học:</b> {{requisitionCourse.total_session}}</p>
+          <p><b>Tổng số tiết học:</b> {{requisitionCourse.total_session}} tiết</p>
           <p><b>Thời lượng tiết học:</b> {{requisitionCourse.time_session}} phút</p>
           <p><b>Ngày gửi:</b> {{requisitionCourse.sent_date}}</p>
           <p><b>Trạng thái:</b> 
@@ -54,7 +54,7 @@
             <span *ngIf="requisitionCourse.status == '4'" class="text-warning">Học viên hủy</span>
           </p>
           <p><b>Mô tả yêu cầu:</b> {{requisitionCourse.description || 'Không có mô tả'}}</p>
-          <p *ngIf="requisitionCourse.comment"><b>Lý do:</b> {{requisitionCourse.comment}}</p>
+          <p *ngIf="requisitionCourse.comment"><b>Lý do hủy:</b> {{requisitionCourse.comment}}</p>
         </div>
       </div>
     </div>

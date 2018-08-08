@@ -43,10 +43,13 @@
             <p>Họ và tên: <b>{{student.first_name}} {{student.last_name}}</b> <i class="fa fas fa-check-circle text-success" *ngIf="student.verification == 1"></i></p>
             <p>Giới tính: <b *ngIf="student.sex == 1">Nam</b> <b *ngIf="student.sex == 0">Nữ</b></p>
             <p>Sinh nhật: <b>{{student.birthday}}</b></p>
-            <p>Số điện thoại: <b>{{student.phone}}</b></p>
+            <p>Trình độ: <b>{{student.degree_name}}</b></p>
+            <p>Công việc: <b>{{student.degree_name}}</b></p>
+            <p>Số điện thoại: <b>{{student.career}}</b></p>
             <p>Skype: <b>{{student.skype}}</b></p>
             <p>Email: <b>{{student.email}}</b></p>
             <p>Địa chỉ: <b>{{student.address}}</b></p>
+            <p>Ngày gia nhập: <b>{{student.date_registered}}</b></p>
           </div>
         </div>
       </div>
