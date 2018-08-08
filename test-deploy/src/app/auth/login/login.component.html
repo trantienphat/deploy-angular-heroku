@@ -1,6 +1,9 @@
 <div class="login-page d-flex flex-column justify-content-center align-items-center w-100">
-
   <div class="panel-login container p-3 border rounded">
+    <div *ngIf="isLoading">
+        <app-loading class="loading"></app-loading>
+    </div>
+
     <h1 class="text-center">Đăng nhập</h1>
     <form class="form-login">
       <div class="form-group">

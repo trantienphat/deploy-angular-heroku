@@ -1,0 +1,55 @@
+.loading-page {
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.detail-loading {
+  display: flex;
+  justify-content: center;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+}
+
+.icon-loading {
+  font-size:48px;
+  color:#e42c00;
+}
+
+.hidden {
+  display: none;
+} 
+
+.show {
+  display: flex;
+}
+
+.button {
+  width: 30%;
+  height: 50%;
+}
+
+.btn-retry {
+  color: #fff;
+}
+
+@keyframes donut-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.donut {
+  display: inline-block;
+  border: 10px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #545ff7;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: donut-spin 1.2s linear infinite;
+}

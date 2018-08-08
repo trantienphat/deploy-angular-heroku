@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   public loginRequest = new LoginRequestModel();
 
   public redirectUrl = '';
+  public isLoading = false;
 
   constructor(private sharedService: SharedService,
     private authService: AuthService,
@@ -44,8 +45,10 @@ export class LoginComponent implements OnInit {
   }
 
   onClickSignInButton() {
+    this.isLoading = true;
     if (!this.loginRequest.email || !this.loginRequest.password) {
       this.toast.error('Vui lòng không để trống tài khoản hoặc mật khẩu');
+      this.isLoading = false;
     } else {
       this.authService.login(this.loginRequest);
       this.subscriptionLogin = this.authService.loginSubcription.subscribe(res => {
@@ -55,10 +58,12 @@ export class LoginComponent implements OnInit {
         } else {
           this.sharedService.clearLocalStorage();
           this.toast.error('Sai tài khoản hoặc mật khẩu');
+          this.isLoading = false;
         }
       }, error => {
         this.sharedService.clearLocalStorage();
         this.toast.error('Sai tài khoản hoặc mật khẩu');
+        this.isLoading = false;
       });
     }
 
@@ -72,6 +77,7 @@ export class LoginComponent implements OnInit {
       if (res !== []) {
         const userInfo = res[0];
         this.sharedService.setLocalStorage(CommonConstants.userInfo, userInfo);
+        this.isLoading = false;
         this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
       }
     });
