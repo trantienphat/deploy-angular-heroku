@@ -35,6 +35,7 @@ import { DashboardService } from './containers/dashboard-page/dashboard.service'
 import { RequisitionDetailsComponent } from './containers/listing-requisitions-page/requisition-details/requisition-details.component';
 import { StudentDetailsComponent } from './containers/listing-students-page/student-details/student-details.component';
 import { TutorDetailsComponent } from './containers/listing-tutors-page/tutor-details/tutor-details.component';
+import { LoadingComponent } from './shared/components/loading/loading.component';
 
 
 
@@ -51,7 +52,8 @@ import { TutorDetailsComponent } from './containers/listing-tutors-page/tutor-de
     CardUserInfoComponent,
     RequisitionDetailsComponent,
     StudentDetailsComponent,
-    TutorDetailsComponent
+    TutorDetailsComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
