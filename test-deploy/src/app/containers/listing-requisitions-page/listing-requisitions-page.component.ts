@@ -23,7 +23,7 @@ export class ListingRequisitionsPageComponent implements OnInit {
   public page = 1;
 
   constructor(private sharedService: SharedService,
-     private authService: AuthService,
+    private authService: AuthService,
     private requisitionService: RequisitionCourseService) {
     this.checkAccessPage();
   }
@@ -49,14 +49,9 @@ export class ListingRequisitionsPageComponent implements OnInit {
   getRequisitionsCourse() {
     this.requisitionService.getRequistionCourse().subscribe(res => {
       this.arrayRequisition = res;
-      console.log(this.arrayRequisition);
     });
   }
   ngOnInit() {
-    // const x = JSON.parse(this.string);
-    // this.array = x.response;
-    // this.count = this.array.length;
-    // console.log(this.count);
   }
 
   onClickAccountButton() {
@@ -84,7 +79,6 @@ export class ListingRequisitionsPageComponent implements OnInit {
   }
 
   onClickLogoutButton() {
-    // Code here
     this.authService.logout();
   }
 
