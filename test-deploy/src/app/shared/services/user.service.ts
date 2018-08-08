@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { GetUserInfoRequest, GetUserByAuth } from '../models/user.model';
+import { GetUserInfoRequest, GetUserByAuth, CheckOldPasswordRequest, CheckOldPasswordResponse, ChangePasswordResponse } from '../models/user.model';
 import { environment } from '../../../environments/environment';
 import { ApiUrl } from '../constants/api-url.constant';
 import HttpParamsHelper from '../helper/http-param.helper';
@@ -21,5 +21,18 @@ export class UserService {
   public getUserByAuth(request: GetUserByAuth): Observable<any> {
     const apiUrl = `${this.base_uri}${ApiUrl.GET_USER_BY_AUTH}`;
     return this.http.get(apiUrl, { params: HttpParamsHelper.parseObjectToHttpParams(request) });
+  }
+
+  public checkOldPassword(request: any): Observable<CheckOldPasswordResponse> {
+    const apiUrl = `${this.base_uri}${ApiUrl.CHECK_OLD_PASSWORD}`;
+    return this.http.get(apiUrl, { params: HttpParamsHelper.parseObjectToHttpParams(request) });
+  }
+
+  public updateUserInfo(request: any): Observable<ChangePasswordResponse> {
+    const apiUrl = `${this.base_uri}${ApiUrl.UPDATE_INFO_USER}`;
+    const jsonValue = JSON.stringify(request);
+    const formData = new FormData();
+    formData.append('request', jsonValue);
+    return this.http.postFormData(apiUrl, formData);
   }
 }

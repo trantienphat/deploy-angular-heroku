@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../shared/services/shared.service';
 import { PageName } from '../../shared/constants/routing.constant';
 import { AuthService } from '../../auth/auth.service';
-import { User, ChangePasswordRequest } from '../../shared/models/user.model';
+import { User, CheckOldPasswordRequest, ChangePasswordRequest } from '../../shared/models/user.model';
 import { CommonConstants } from '../../shared/constants/common.constant';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../shared/services/user.service';
@@ -14,20 +14,21 @@ import { UserService } from '../../shared/services/user.service';
 })
 export class ChangePasswordPageComponent implements OnInit {
 
-  public user = new User();
+  public currentUser = new User();
 
-  public changePasswordRequest = new ChangePasswordRequest();
-  public repeatNewPassword;
+  public oldPassword = '';
+  public newPassword = '';
+  public repeatNewPassword = '';
 
   constructor(private sharedService: SharedService,
     private authService: AuthService,
     private toast: ToastrService,
     private userService: UserService) {
     this.checkAccessPage();
-   }
+  }
 
   checkAccessPage() {
-    if ( !this.authService.checkAuthentication()) {
+    if (!this.authService.checkAuthentication()) {
       this.authService.logout();
     } else {
       this.initPage();
@@ -35,11 +36,11 @@ export class ChangePasswordPageComponent implements OnInit {
   }
 
   initPage() {
-    const _user = JSON.parse(window.localStorage.getItem(CommonConstants.userInfo));
-    if ( !_user) {
+    const userInfo = this.sharedService.getLocalStorage(CommonConstants.userInfo);
+    if (!userInfo) {
       this.authService.logout();
     } else {
-      this.user = _user;
+      this.currentUser = userInfo;
     }
   }
 
@@ -71,20 +72,60 @@ export class ChangePasswordPageComponent implements OnInit {
   }
 
   onClickLogoutButton() {
-    // Code here
     this.authService.logout();
   }
 
   onClickSubmitButton() {
-    if ( !this.changePasswordRequest.oldPassword || !this.changePasswordRequest.newPassword || !this.repeatNewPassword) {
-      this.toast.error('Vui lòng không để trống mật khẩu cũ, mật khẩu mới và xác nhận mật khẩu');
+    const checkInput = this.checkInputChangePassword();
+    if (checkInput) {
+      const checkOldPasswordRequest: CheckOldPasswordRequest = {
+        id: this.currentUser.id,
+        oldPassword: this.oldPassword
+      };
+      const requestCheckOld = {
+        request: JSON.stringify(checkOldPasswordRequest)
+      };
+      this.userService.checkOldPassword(requestCheckOld).subscribe(res => {
+        if (res.status === '1') {
+          const changePasswordRequest: ChangePasswordRequest = {
+            id: this.currentUser.id,
+            password: this.newPassword
+          };
+          const json = JSON.stringify(changePasswordRequest);
+          this.userService.updateUserInfo(changePasswordRequest).subscribe(resP => {
+            if (resP) {
+              this.toast.success('Thay đổi mật khẩu thành công');
+              this.authService.logout();
+            } else {
+              this.toast.error('Mật khẩu cũ không chính xác');
+            }
+          }, error => {
+            this.toast.error('Mật khẩu cũ không chính xác');
+          });
+        } else {
+          this.toast.error('Mật khẩu cũ không chính xác');
+        }
+      }, error => {
+        this.toast.error('Mật khẩu cũ không chính xác');
+      });
     }
-    if (this.changePasswordRequest.oldPassword && this.changePasswordRequest.newPassword &&
-      this.changePasswordRequest.oldPassword === this.changePasswordRequest.newPassword) {
+  }
+
+  checkInputChangePassword() {
+    let status = true;
+    if (!this.oldPassword || !this.newPassword || !this.repeatNewPassword) {
+      this.toast.error('Vui lòng không để trống mật khẩu cũ, mật khẩu mới hoặc xác nhận mật khẩu');
+      status = false;
+    }
+    if (this.oldPassword && this.newPassword &&
+      this.oldPassword === this.newPassword) {
       this.toast.error('Mật khẩu mới không được giống mật khẩu cũ');
+      status = false;
     }
-    if (this.changePasswordRequest.newPassword !== this.repeatNewPassword && this.changePasswordRequest.oldPassword ) {
+    if (this.newPassword !== this.repeatNewPassword && this.oldPassword) {
       this.toast.error('Mật khẩu mới và xác nhận mật khẩu không khớp');
+      status = false;
     }
+    return status;
   }
 }

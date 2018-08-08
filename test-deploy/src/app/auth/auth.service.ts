@@ -26,7 +26,7 @@ export class AuthService {
     private toast: ToastrService) { }
 
   loginApi(request: LoginRequestModel): Observable<any> {
-    const url = this.base_uri + ApiUrl.LOGIN_API;
+    const url = `${this.base_uri}${ApiUrl.LOGIN_API}`;
     const jsonValue = JSON.stringify(request);
     const formData = new FormData();
     formData.append('request', jsonValue);
@@ -35,17 +35,11 @@ export class AuthService {
 
   login(request: LoginRequestModel) {
     this.loginApi(request).subscribe((res) => {
-      if (res) {
         const response: LoginResponseModel = res.body;
         if ( response !== undefined) {
           this.sharedService.setLocalStorage(CommonConstants.user, response);
           this.loginSubcription.next();
-        } else {
-          this.toast.error('Sai tài khoản hoặc mật khẩu');
         }
-      } else {
-        this.toast.error('Sai tài khoản hoặc mật khẩu');
-      }
     }, error => {
       this.toast.error('Sai tài khoản hoặc mật khẩu');
     });

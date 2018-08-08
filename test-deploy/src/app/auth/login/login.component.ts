@@ -69,9 +69,11 @@ export class LoginComponent implements OnInit {
       id: _id
     };
     this.userService.getUserInfo(request).subscribe(res => {
-      const userInfo = res[0];
-      this.sharedService.setLocalStorage(CommonConstants.userInfo, userInfo);
-      this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
+      if (res !== []) {
+        const userInfo = res[0];
+        this.sharedService.setLocalStorage(CommonConstants.userInfo, userInfo);
+        this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
+      }
     });
   }
 }

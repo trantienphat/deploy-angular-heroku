@@ -57,7 +57,20 @@ export class GetUserByAuth {
     public authorization: string;
 }
 
-export class ChangePasswordRequest {
+export class CheckOldPasswordRequest {
+    public id: string;
     public oldPassword: string;
-    public newPassword: string;
+}
+
+export class CheckOldPasswordResponse {
+    public status: string;
+}
+// Model new password for change
+export class ChangePasswordRequest {
+    public id: string;
+    public password: string;
+}
+
+export class ChangePasswordResponse {
+    public status: string;
 }
