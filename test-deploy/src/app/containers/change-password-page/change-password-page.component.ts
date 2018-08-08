@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../shared/services/shared.service';
 import { PageName } from '../../shared/constants/routing.constant';
 import { AuthService } from '../../auth/auth.service';
-import { User } from '../../shared/models/user.model';
+import { User, ChangePasswordRequest } from '../../shared/models/user.model';
 import { CommonConstants } from '../../shared/constants/common.constant';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-change-password-page',
@@ -14,7 +16,13 @@ export class ChangePasswordPageComponent implements OnInit {
 
   public user = new User();
 
-  constructor(private sharedService: SharedService, private authService: AuthService) {
+  public changePasswordRequest = new ChangePasswordRequest();
+  public repeatNewPassword;
+
+  constructor(private sharedService: SharedService,
+    private authService: AuthService,
+    private toast: ToastrService,
+    private userService: UserService) {
     this.checkAccessPage();
    }
 
@@ -65,5 +73,18 @@ export class ChangePasswordPageComponent implements OnInit {
   onClickLogoutButton() {
     // Code here
     this.authService.logout();
+  }
+
+  onClickSubmitButton() {
+    if ( !this.changePasswordRequest.oldPassword || !this.changePasswordRequest.newPassword || !this.repeatNewPassword) {
+      this.toast.error('Vui lòng không để trống mật khẩu cũ, mật khẩu mới và xác nhận mật khẩu');
+    }
+    if (this.changePasswordRequest.oldPassword && this.changePasswordRequest.newPassword &&
+      this.changePasswordRequest.oldPassword === this.changePasswordRequest.newPassword) {
+      this.toast.error('Mật khẩu mới không được giống mật khẩu cũ');
+    }
+    if (this.changePasswordRequest.newPassword !== this.repeatNewPassword && this.changePasswordRequest.oldPassword ) {
+      this.toast.error('Mật khẩu mới và xác nhận mật khẩu không khớp');
+    }
   }
 }

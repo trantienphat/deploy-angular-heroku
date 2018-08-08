@@ -34,3 +34,8 @@ export class GetUserInfoRequest {
 export class GetUserByAuth {
     public authorization: string;
 }
+
+export class ChangePasswordRequest {
+    public oldPassword: string;
+    public newPassword: string;
+}
