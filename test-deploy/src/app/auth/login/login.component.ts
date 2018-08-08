@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../shared/services/shared.service';
 import { PageName } from '../../shared/constants/routing.constant';
-import { LoginRequestModel, GetUserInfoRequest } from '../../shared/models/user.model';
+import { LoginRequestModel, GetUserInfoRequest, LoginResponseModel } from '../../shared/models/user.model';
 import { AuthService } from '../auth.service';
 import { CommonConstants } from '../../shared/constants/common.constant';
 import { UserService } from '../../shared/services/user.service';
@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit {
     } else {
       this.authService.login(this.loginRequest);
       this.subscriptionLogin = this.authService.loginSubcription.subscribe(res => {
-        const currentUser = this.sharedService.getLocalStorage(CommonConstants.user);
-        if (currentUser.status === '1') {
+        const currentUser: LoginResponseModel = this.sharedService.getLocalStorage(CommonConstants.user);
+        if (currentUser && currentUser.status === '1') {
           this.getCurrentUserInfo(currentUser.id);
         } else {
           this.sharedService.clearLocalStorage();
