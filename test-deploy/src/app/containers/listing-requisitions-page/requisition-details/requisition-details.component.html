@@ -8,7 +8,7 @@
       <div ngbDropdown placement="bottom-right">
         <button class="menu-button border-0 bg-transparent text-white" ngbDropdownToggle>
           <span class="menu-button__label fa fas fa-user"></span>
-          {{user.email}}
+          {{currentUser.email}}
           <i class="fa fas fa-caret-down ml-1"></i>
         </button>
         <div ngbDropdownMenu class="pop-menu border rounded-0">
@@ -38,12 +38,12 @@
           </p>
         </div>
         <div class="card-body border border-top-0 p-3 d-flex flex-column w-100">
-          <p><b>Họ và tên học viên:</b> {{requisitionCourse.student_last_name}} {{requisitionCourse.student_first_name}}</p>
-          <p><b>Họ và tên gia sư:</b> {{requisitionCourse.tutor_last_name}} {{requisitionCourse.tutor_first_name}}</p>
+          <p class="person-name" (click)="onClickStudentName()"><b>Họ và tên học viên:</b> {{requisitionCourse.student_last_name}} {{requisitionCourse.student_first_name}}</p>
+          <p class="person-name"  (click)="onClickTutorName()"><b>Họ và tên gia sư:</b> {{requisitionCourse.tutor_last_name}} {{requisitionCourse.tutor_first_name}}</p>
           <p><b>Môn học:</b> {{requisitionCourse.subject_name}}</p>
           <p><b>Học phí:</b> {{requisitionCourse.tuition}}/Buổi</p>
           <p><b>Lịch học:</b> {{requisitionCourse.schedule}}</p>
-          <p><b>Tổng số tiết học:</b> {{requisitionCourse.total_session}}</p>
+          <p><b>Tổng số tiết học:</b> {{requisitionCourse.total_session}} tiết</p>
           <p><b>Thời lượng tiết học:</b> {{requisitionCourse.time_session}} phút</p>
           <p><b>Ngày gửi:</b> {{requisitionCourse.sent_date}}</p>
           <p><b>Trạng thái:</b> 
@@ -54,7 +54,7 @@
             <span *ngIf="requisitionCourse.status == '4'" class="text-warning">Học viên hủy</span>
           </p>
           <p><b>Mô tả yêu cầu:</b> {{requisitionCourse.description || 'Không có mô tả'}}</p>
-          <p *ngIf="requisitionCourse.comment"><b>Lý do:</b> {{requisitionCourse.comment}}</p>
+          <p *ngIf="requisitionCourse.comment"><b>Lý do hủy:</b> {{requisitionCourse.comment}}</p>
         </div>
       </div>
     </div>

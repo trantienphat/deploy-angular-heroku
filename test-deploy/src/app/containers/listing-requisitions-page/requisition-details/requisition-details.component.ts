@@ -16,7 +16,7 @@ import { RequestRequisitionById, RequisitionCourse, ResponseRequisitionById } fr
 export class RequisitionDetailsComponent implements OnInit {
 
   public id = '';
-  public user = new User();
+  public currentUser = new User();
   public requisitionCourse = new ResponseRequisitionById();
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -37,11 +37,11 @@ export class RequisitionDetailsComponent implements OnInit {
   }
 
   initPage() {
-    const _user = JSON.parse(window.localStorage.getItem(CommonConstants.userInfo));
-    if ( !_user) {
+    const userInfo: User = this.sharedService.getLocalStorage(CommonConstants.userInfo);
+    if ( !userInfo) {
       this.authService.logout();
     } else {
-      this.user = _user;
+      this.currentUser = userInfo;
       this.activatedRoute.queryParams.subscribe(param => {
         this.id = param.id;
         this.getRequisitionsCourseById(this.id);
@@ -88,6 +88,20 @@ export class RequisitionDetailsComponent implements OnInit {
   onClickLogoutButton() {
     // Code here
     this.authService.logout();
+  }
+
+  onClickTutorName() {
+    const paramRouting = {
+      id: this.requisitionCourse.tutor_id
+    };
+    this.sharedService.routingToPageWithParam(PageName.DETAILS_TUTOR_INFO_PAGE, paramRouting);
+  }
+
+  onClickStudentName() {
+    const paramRouting = {
+      id: this.requisitionCourse.student_id
+    };
+    this.sharedService.routingToPageWithParam(PageName.DETAILS_STUDENT_INFO_PAGE, paramRouting);
   }
 
 }

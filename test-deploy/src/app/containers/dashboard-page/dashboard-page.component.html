@@ -8,7 +8,7 @@
       <div ngbDropdown placement="bottom-right">
         <button class="menu-button border-0 bg-transparent text-white" ngbDropdownToggle>
           <span class="menu-button__label fa fas fa-user"></span>
-          <span class="username-label text-truncate">{{user.email}}</span>
+          <span class="username-label text-truncate">{{currentUser.email}}</span>
           <i class="fa fas fa-caret-down ml-1"></i>
         </button>
         <div ngbDropdownMenu class="pop-menu border rounded-0">
@@ -139,10 +139,5 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="d-flex flex-row w-100 h-100">
-      <div class="side-bar w-25 h-100 bg-success"></div>
-      <div class=" content-page w-100 h-100">AAA</div>
-    </div> -->
   </div>
 </div>

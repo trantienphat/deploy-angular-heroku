@@ -13,4 +13,22 @@ export class SharedService {
   public routingToPageWithParam(page: string, param: any) {
     this.router.navigate([`/${page}`], { queryParams: param });
   }
+
+  public setLocalStorage(key: string, value: any) {
+    const _value = JSON.stringify(value);
+    window.localStorage.setItem(key, _value);
+  }
+
+  public getLocalStorage(key: string) {
+    const value = JSON.parse(window.localStorage.getItem(key));
+    return value;
+  }
+
+  public removeLocalStorage(key: string) {
+    window.localStorage.removeItem(key);
+  }
+
+  public clearLocalStorage() {
+    window.localStorage.clear();
+  }
 }

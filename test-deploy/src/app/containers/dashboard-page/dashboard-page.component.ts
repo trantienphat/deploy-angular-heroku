@@ -15,7 +15,7 @@ import { User } from '../../shared/models/user.model';
 })
 export class DashboardPageComponent implements OnInit {
 
-  public user = new User();
+  public currentUser = new User();
 
   public dashboardInfo = new DashboardModel();
 
@@ -36,8 +36,8 @@ export class DashboardPageComponent implements OnInit {
   initPage() {
     this.dashboardService.getDashboardInfo().subscribe(res => {
       this.dashboardInfo = res;
-      const _user = JSON.parse(window.localStorage.getItem(CommonConstants.userInfo));
-      this.user = _user;
+      const userInfo: User = this.sharedService.getLocalStorage(CommonConstants.userInfo);
+      this.currentUser = userInfo;
     });
   }
 
@@ -69,7 +69,6 @@ export class DashboardPageComponent implements OnInit {
   }
 
   onClickLogoutButton() {
-    // Code here
     this.authService.logout();
   }
 }

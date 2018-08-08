@@ -15,11 +15,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
+  public subscriptionLogin: Subscription;
   public loginRequest = new LoginRequestModel();
 
   public redirectUrl = '';
-
-  public subscriptionLogin: Subscription;
 
   constructor(private sharedService: SharedService,
     private authService: AuthService,
@@ -32,13 +31,12 @@ export class LoginComponent implements OnInit {
     if (!this.authService.checkAuthentication()) {
       this.authService.logout();
     } else {
-      this.redirectUrl = window.localStorage.getItem(CommonConstants.redirectUrl);
+      this.redirectUrl = this.sharedService.getLocalStorage(CommonConstants.redirectUrl);
       if (this.redirectUrl) {
-        this.sharedService.routingToPage(this.redirectUrl);
+        this.sharedService.routingToPage(this.redirectUrl); // Routing to the previous page if was login
       } else {
         this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
       }
-
     }
   }
 
@@ -51,15 +49,15 @@ export class LoginComponent implements OnInit {
     } else {
       this.authService.login(this.loginRequest);
       this.subscriptionLogin = this.authService.loginSubcription.subscribe(res => {
-        const currentUser = JSON.parse(window.localStorage.getItem(CommonConstants.user));
-        if (currentUser.status == 1) {
+        const currentUser = this.sharedService.getLocalStorage(CommonConstants.user);
+        if (currentUser.status === '1') {
           this.getCurrentUserInfo(currentUser.id);
         } else {
-          window.localStorage.clear();
+          this.sharedService.clearLocalStorage();
           this.toast.error('Sai tài khoản hoặc mật khẩu');
         }
       }, error => {
-        window.localStorage.clear();
+        this.sharedService.clearLocalStorage();
         this.toast.error('Sai tài khoản hoặc mật khẩu');
       });
     }
@@ -71,8 +69,8 @@ export class LoginComponent implements OnInit {
       id: _id
     };
     this.userService.getUserInfo(request).subscribe(res => {
-      const stringValue = JSON.stringify(res[0]);
-      window.localStorage.setItem(CommonConstants.userInfo, stringValue);
+      const userInfo = res[0];
+      this.sharedService.setLocalStorage(CommonConstants.userInfo, userInfo);
       this.sharedService.routingToPage(PageName.DASHBOARD_PAGE);
     });
   }

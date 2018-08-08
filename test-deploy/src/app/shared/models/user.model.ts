@@ -15,6 +15,28 @@ export class User {
     public career?: string;
     public date_registered?: string;
     public status?: string;
+    public degree_name?: string;
+
+    constructor(data?: any) {
+        if (!data) {return;}
+        this.id = data.id;
+        this.avatar = data.avatar;
+        this.first_name = data.first_name;
+        this.last_name = data.last_name;
+        this.sex = data.sex;
+        this.birthday = data.birthday;
+        this.email = data.email;
+        this.phone = data.phone;
+        this.skype = data.skype;
+        this.address = data.address;
+        this.degree = data.degree;
+        this.verification = data.verification;
+        this.authorization = data.authorization;
+        this.career = data.career;
+        this.date_registered = data.date_registered;
+        this.status = data.status;
+        this.degree_name = data.degree_name;
+    }
 }
 
 export class LoginRequestModel {
