@@ -16,7 +16,7 @@ import { collectExternalReferences } from '@angular/compiler';
 export class ListingRequisitionsPageComponent implements OnInit {
 
 
-  public user = new User();
+  public currentUser = new User();
 
   public arrayRequisition: Array<RequisitionCourse> = [];
   public pageSize = 10;
@@ -37,11 +37,11 @@ export class ListingRequisitionsPageComponent implements OnInit {
   }
 
   initPage() {
-    const _user = JSON.parse(window.localStorage.getItem(CommonConstants.userInfo));
-    if ( !_user) {
+    const userInfo: User = this.sharedService.getLocalStorage(CommonConstants.userInfo);
+    if ( !userInfo) {
       this.authService.logout();
     } else {
-      this.user = _user;
+      this.currentUser = userInfo;
       this.getRequisitionsCourse();
     }
   }

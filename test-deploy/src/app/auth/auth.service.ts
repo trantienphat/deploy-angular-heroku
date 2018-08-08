@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoginRequestModel, GetUserInfoRequest } from '../shared/models/user.model';
+import { LoginRequestModel, GetUserInfoRequest, LoginResponseModel } from '../shared/models/user.model';
 import { CommonConstants } from '../shared/constants/common.constant';
 import { HttpService } from '../shared/services/http.service';
 import { ApiUrl } from '../shared/constants/api-url.constant';
@@ -22,12 +22,10 @@ export class AuthService {
   public loginSubcription = new Subject<any>();
 
   constructor(private http: HttpService,
-     private sharedService: SharedService,
-    private userService: UserService,
+    private sharedService: SharedService,
     private toast: ToastrService) { }
 
   loginApi(request: LoginRequestModel): Observable<any> {
-    // Code here
     const url = this.base_uri + ApiUrl.LOGIN_API;
     const jsonValue = JSON.stringify(request);
     const formData = new FormData();
@@ -38,10 +36,12 @@ export class AuthService {
   login(request: LoginRequestModel) {
     this.loginApi(request).subscribe((res) => {
       if (res) {
-        const response = JSON.stringify(res.body);
+        const response: LoginResponseModel = res.body;
         if ( response !== undefined) {
-          window.localStorage.setItem(CommonConstants.user, response);
+          this.sharedService.setLocalStorage(CommonConstants.user, response);
           this.loginSubcription.next();
+        } else {
+          this.toast.error('Sai tài khoản hoặc mật khẩu');
         }
       } else {
         this.toast.error('Sai tài khoản hoặc mật khẩu');
@@ -52,15 +52,13 @@ export class AuthService {
   }
 
   logout() {
-    // Code here
-    window.localStorage.clear();
+    this.sharedService.clearLocalStorage();
     this.sharedService.routingToPage(PageName.LOGIN_PAGE);
   }
 
   checkAuthentication(): boolean {
-    // Code check is login
-    const data = window.localStorage.getItem(CommonConstants.user);
-    if ( data) {
+    const data: LoginResponseModel = this.sharedService.getLocalStorage(CommonConstants.user);
+    if ( data.status === '1') {
       return true;
     } else {
       return false;
@@ -68,10 +66,10 @@ export class AuthService {
   }
 
   setPreviousUrlBeforeLogging(url: string) {
-    window.localStorage.setItem(CommonConstants.redirectUrl, url);
+    this.sharedService.setLocalStorage(CommonConstants.redirectUrl, url);
   }
 
-  getPreviousUrlBeforeLogging() {
-    return window.localStorage.getItem(CommonConstants.redirectUrl);
+  getPreviousUrlBeforeLogging(): string {
+    return this.sharedService.getLocalStorage(CommonConstants.redirectUrl);
   }
 }
