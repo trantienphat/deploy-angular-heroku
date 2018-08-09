@@ -20,6 +20,8 @@ export class ListingTutorsPageComponent implements OnInit {
 
   public pageSize = 10;
   public page = 1;
+
+  public isLoading = false;
   constructor(private sharedService: SharedService,
      private authService: AuthService,
     private userService: UserService) {
@@ -45,12 +47,14 @@ export class ListingTutorsPageComponent implements OnInit {
   }
 
   getArrayTutor() {
+    this.isLoading = true;
     const typeAuthTutor = '2';
     const request: GetUserByAuth = {
       authorization: typeAuthTutor
     };
     this.userService.getUserByAuth(request).subscribe(res => {
       this.arrayTutor = res;
+      this.isLoading = false;
     });
   }
 

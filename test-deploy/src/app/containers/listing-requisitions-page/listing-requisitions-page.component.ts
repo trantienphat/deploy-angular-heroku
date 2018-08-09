@@ -22,6 +22,8 @@ export class ListingRequisitionsPageComponent implements OnInit {
   public pageSize = 10;
   public page = 1;
 
+  public isLoading = false;
+
   constructor(private sharedService: SharedService,
     private authService: AuthService,
     private requisitionService: RequisitionCourseService) {
@@ -47,8 +49,10 @@ export class ListingRequisitionsPageComponent implements OnInit {
   }
 
   getRequisitionsCourse() {
+    this.isLoading = true;
     this.requisitionService.getRequistionCourse().subscribe(res => {
       this.arrayRequisition = res;
+      this.isLoading = false;
     });
   }
   ngOnInit() {

@@ -21,6 +21,8 @@ export class StudentDetailsComponent implements OnInit {
   public studentAvatar = '';
   public defaultAvatar = '/assets/img/images_default_avatar.png';
 
+  public isLoading = false;
+
   constructor(private sharedService: SharedService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
@@ -50,12 +52,14 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   getStudentById(_id: string) {
+    this.isLoading = true;
     const request: GetUserInfoRequest = {
       id: _id
     };
     this.userService.getUserInfo(request).subscribe(res => {
       this.student = res[0];
       this.setAvatarStudent();
+      this.isLoading = false;
     });
   }
 

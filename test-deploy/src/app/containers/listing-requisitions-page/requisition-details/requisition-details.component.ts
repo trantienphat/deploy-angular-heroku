@@ -19,6 +19,8 @@ export class RequisitionDetailsComponent implements OnInit {
   public currentUser = new User();
   public requisitionCourse = new ResponseRequisitionById();
 
+  public isLoading = false;
+
   constructor(private activatedRoute: ActivatedRoute,
     private sharedService: SharedService,
     private authService: AuthService,
@@ -50,11 +52,13 @@ export class RequisitionDetailsComponent implements OnInit {
   }
 
   getRequisitionsCourseById(_id: string) {
+    this.isLoading = true;
     const request: RequestRequisitionById = {
       id: _id
     };
     this.requisitionService.getRequisitionCourseById(request).subscribe(res => {
       this.requisitionCourse = res[0];
+      this.isLoading = false;
     });
   }
 

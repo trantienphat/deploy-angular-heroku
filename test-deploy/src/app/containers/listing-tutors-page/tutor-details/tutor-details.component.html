@@ -30,7 +30,12 @@
       </div>
     </div>
 
-    <div class="tutor-details-content d-flex flex-column p-4">
+    
+    <div class="w-100 h-100" *ngIf="isLoading">
+        <app-loading class="loading" [isRetry]="isRetry"></app-loading>
+    </div>
+
+    <div class="tutor-details-content d-flex flex-column p-4" *ngIf="!isLoading">
       <div class="card border-0 mt-2 w-100 h-100">
         <div class="card-header bg-info">
           <p class="h3 text-white">
