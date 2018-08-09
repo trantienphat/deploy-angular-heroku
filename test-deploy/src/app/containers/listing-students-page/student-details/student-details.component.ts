@@ -6,6 +6,8 @@ import { PageName } from '../../../shared/constants/routing.constant';
 import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
 import { AuthService } from '../../../auth/auth.service';
 import { CommonConstants } from '../../../shared/constants/common.constant';
+import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-student-details',
@@ -24,10 +26,13 @@ export class StudentDetailsComponent implements OnInit {
   public isLoading = false;
   public isRetry = false;
 
+  public bannedSubcription: Subscription;
+
   constructor(private sharedService: SharedService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private toast: ToastrService) {
     this.checkAccessPage();
   }
 
@@ -45,6 +50,10 @@ export class StudentDetailsComponent implements OnInit {
       this.authService.logout();
     } else {
       this.user = _user;
+      this.bannedSubcription = this.sharedService.bannedSubcription.subscribe(res => {
+        this.toast.success('Tài khoản đã bị khóa');
+        this.sharedService.routingToPage(PageName.LISTING_STUDENT_PAGE);
+      });
       this.activatedRoute.queryParams.subscribe(param => {
         this.id = param.id;
         this.getStudentById(this.id);

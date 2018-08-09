@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '../../../../node_modules/@angular/router';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class SharedService {
+
+  public bannedSubcription = new Subject<any>();
 
   constructor(private router: Router) { }
 

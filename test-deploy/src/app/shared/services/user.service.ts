@@ -28,7 +28,7 @@ export class UserService {
     return this.http.get(apiUrl, { params: HttpParamsHelper.parseObjectToHttpParams(request) });
   }
 
-  public updateUserInfo(request: any): Observable<ChangePasswordResponse> {
+  public updateUserInfo(request: any): Observable<any> {
     const apiUrl = `${this.base_uri}${ApiUrl.UPDATE_INFO_USER}`;
     const jsonValue = JSON.stringify(request);
     const formData = new FormData();

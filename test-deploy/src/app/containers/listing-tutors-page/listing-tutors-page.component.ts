@@ -5,6 +5,8 @@ import { AuthService } from '../../auth/auth.service';
 import { User, GetUserByAuth } from '../../shared/models/user.model';
 import { CommonConstants } from '../../shared/constants/common.constant';
 import { UserService } from '../../shared/services/user.service';
+import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-listing-tutors-page',
@@ -24,9 +26,12 @@ export class ListingTutorsPageComponent implements OnInit {
   public isLoading = false;
   public isRetry = false;
 
+  public bannedSubcription: Subscription;
+
   constructor(private sharedService: SharedService,
      private authService: AuthService,
-    private userService: UserService) {
+    private userService: UserService,
+    private toast: ToastrService) {
     this.checkAccessPage();
    }
 
@@ -44,6 +49,10 @@ export class ListingTutorsPageComponent implements OnInit {
       this.authService.logout();
     } else {
       this.user = _user;
+      this.bannedSubcription = this.sharedService.bannedSubcription.subscribe(res => {
+        this.toast.success('Tài khoản đã bị khóa');
+        this.getArrayTutor();
+      });
       this.getArrayTutor();
     }
   }

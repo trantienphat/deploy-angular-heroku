@@ -5,6 +5,8 @@ import { AuthService } from '../../auth/auth.service';
 import { User, GetUserByAuth } from '../../shared/models/user.model';
 import { CommonConstants } from '../../shared/constants/common.constant';
 import { UserService } from '../../shared/services/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-listing-students-page',
@@ -25,9 +27,12 @@ export class ListingStudentsPageComponent implements OnInit {
   public isLoading = false;
   public isRetry = false;
 
+  public bannedSubcription: Subscription;
+
   constructor(private sharedService: SharedService,
      private authService: AuthService,
-    private userService: UserService) {
+    private userService: UserService,
+    private toast: ToastrService) {
     this.checkAccessPage();
    }
 
@@ -45,6 +50,10 @@ export class ListingStudentsPageComponent implements OnInit {
       this.authService.logout();
     } else {
       this.user = _user;
+      this.bannedSubcription = this.sharedService.bannedSubcription.subscribe(res => {
+        this.toast.success('Tài khoản đã bị khóa');
+        this.getArrayStudent();
+      });
       this.getArrayStudent();
     }
   }

@@ -74,3 +74,12 @@ export class ChangePasswordRequest {
 export class ChangePasswordResponse {
     public status: string;
 }
+
+export class BannedRequest {
+    public id: string;
+    public authorization: string;
+}
+
+export class BannedResponse {
+    public status: string;
+}
