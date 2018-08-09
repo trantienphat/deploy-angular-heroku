@@ -22,6 +22,8 @@ export class TutorDetailsComponent implements OnInit {
   public defaultAvatar = '/assets/img/images_default_avatar.png';
 
   public isLoading = false;
+  public isRetry = false;
+
   constructor(private sharedService: SharedService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
@@ -52,17 +54,32 @@ export class TutorDetailsComponent implements OnInit {
 
   getTutorById(_id: string) {
     this.isLoading = true;
+    this.isRetry = false;
     const request: GetUserInfoRequest = {
       id: _id
     };
     this.userService.getUserInfo(request).subscribe(res => {
-      this.tutor = res[0];
-      this.setAvatarTutor();
-      this.isLoading = false;
+      const array: Array<any> = res;
+      if (array.length !== 0) {
+        this.tutor = res[0];
+        this.setAvatarTutor();
+        this.isLoading = false;
+      } else {
+        this.isRetry = true;
+      }
+    }, error => {
+      this.isRetry = true;
     });
   }
 
   ngOnInit() {
+  }
+
+  onClickRetry(event: any) {
+    this.activatedRoute.queryParams.subscribe(param => {
+      this.id = param.id;
+      this.getTutorById(this.id);
+    });
   }
 
   setAvatarTutor() {

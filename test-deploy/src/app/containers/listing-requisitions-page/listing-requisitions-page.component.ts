@@ -23,6 +23,7 @@ export class ListingRequisitionsPageComponent implements OnInit {
   public page = 1;
 
   public isLoading = false;
+  public isRetry = false;
 
   constructor(private sharedService: SharedService,
     private authService: AuthService,
@@ -50,12 +51,20 @@ export class ListingRequisitionsPageComponent implements OnInit {
 
   getRequisitionsCourse() {
     this.isLoading = true;
+    this.isRetry = false;
     this.requisitionService.getRequistionCourse().subscribe(res => {
       this.arrayRequisition = res;
       this.isLoading = false;
+    }, error => {
+      this.isRetry = true;
     });
   }
+
   ngOnInit() {
+  }
+
+  onClickRetry(event: any) {
+    this.getRequisitionsCourse();
   }
 
   onClickAccountButton() {

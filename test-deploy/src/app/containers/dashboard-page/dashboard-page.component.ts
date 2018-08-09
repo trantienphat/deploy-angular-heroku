@@ -40,6 +40,7 @@ export class DashboardPageComponent implements OnInit {
 
   initPage() {
     this.isLoading = true;
+    this.isRetry = false;
     this.dashboardService.getDashboardInfo().subscribe(res => {
       if (res) {
         this.dashboardInfo = res;
@@ -50,7 +51,7 @@ export class DashboardPageComponent implements OnInit {
         this.isRetry = true;
       }
     }, error => {
-      this.isLoading = false;
+      // this.isLoading = false;
       this.isRetry = true;
     });
   }
@@ -58,6 +59,9 @@ export class DashboardPageComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClickRetry(event: any) {
+    this.initPage();
+  }
   onClickAccountButton() {
     this.sharedService.routingToPage(PageName.ACCOUNT_PAGE);
   }

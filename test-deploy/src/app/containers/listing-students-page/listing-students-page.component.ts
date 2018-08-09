@@ -23,6 +23,7 @@ export class ListingStudentsPageComponent implements OnInit {
   public page = 1;
 
   public isLoading = false;
+  public isRetry = false;
 
   constructor(private sharedService: SharedService,
      private authService: AuthService,
@@ -50,6 +51,7 @@ export class ListingStudentsPageComponent implements OnInit {
 
   getArrayStudent() {
     this.isLoading = true;
+    this.isRetry = false;
     const typeAuthTutor = '1';
     const request: GetUserByAuth = {
       authorization: typeAuthTutor
@@ -57,10 +59,16 @@ export class ListingStudentsPageComponent implements OnInit {
     this.userService.getUserByAuth(request).subscribe(res => {
       this.arrayStudent = res;
       this.isLoading = false;
+    }, error => {
+      this.isRetry = true;
     });
   }
 
   ngOnInit() {
+  }
+
+  onClickRetry(event: any) {
+    this.getArrayStudent();
   }
 
   onClickAccountButton() {

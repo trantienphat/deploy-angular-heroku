@@ -20,6 +20,7 @@ export class RequisitionDetailsComponent implements OnInit {
   public requisitionCourse = new ResponseRequisitionById();
 
   public isLoading = false;
+  public isRetry = false;
 
   constructor(private activatedRoute: ActivatedRoute,
     private sharedService: SharedService,
@@ -53,16 +54,31 @@ export class RequisitionDetailsComponent implements OnInit {
 
   getRequisitionsCourseById(_id: string) {
     this.isLoading = true;
+    this.isRetry = false;
     const request: RequestRequisitionById = {
       id: _id
     };
     this.requisitionService.getRequisitionCourseById(request).subscribe(res => {
-      this.requisitionCourse = res[0];
-      this.isLoading = false;
+      const array: Array<any> = res;
+      if (array.length >= 1) {
+        this.requisitionCourse = res[0];
+        this.isLoading = false;
+      } else {
+        this.isRetry = true;
+      }
+    }, error => {
+      this.isRetry = true;
     });
   }
 
   ngOnInit() {
+  }
+
+  onClickRetry(event: any) {
+    this.activatedRoute.queryParams.subscribe(param => {
+      this.id = param.id;
+      this.getRequisitionsCourseById(this.id);
+    });
   }
 
   onClickAccountButton() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-loading',
@@ -8,9 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class LoadingComponent implements OnInit {
 
   @Input() isRetry = false;
+  @Output() retry = new EventEmitter<boolean>();
   constructor() { }
 
   ngOnInit() {
   }
 
+  onButtonRetryClick() {
+    this.retry.emit(true);
+  }
 }
