@@ -45,7 +45,7 @@
         <div class="card-body border border-top-0 p-3">
           <div class="d-flex flex-column">
             <img class="img-thumbnail rounded mx-auto d-block mb-2  w-25" src="{{tutorAvatar}}">
-            <p>Họ và tên: <b>{{tutor.first_name}} {{tutor.last_name}}</b> <i class="fa fas fa-check-circle text-success" *ngIf="tutor.verification == 1"></i></p>
+            <p>Họ và tên: <b>{{tutor.last_name}} {{tutor.first_name}}</b> <i class="fa fas fa-check-circle text-success" *ngIf="tutor.verification == 1"></i></p>
             <p>Giới tính: <b *ngIf="tutor.sex == 1">Nam</b> <b *ngIf="tutor.sex == 0">Nữ</b></p>
             <p>Sinh nhật: <b>{{tutor.birthday}}</b></p>
             <p>Số điện thoại: <b>{{tutor.phone}}</b></p>

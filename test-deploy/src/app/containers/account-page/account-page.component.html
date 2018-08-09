@@ -40,7 +40,7 @@
         <div class="card-body border border-top-0 p-3">
           <div class="d-flex flex-column">
             <img class="img-thumbnail rounded mx-auto d-block mb-2  w-25" src="{{userAvatar}}">
-            <p>Họ và tên: <b>{{user.first_name}} {{user.last_name}}</b> <i class="fa fas fa-check-circle text-success" *ngIf="user.verification == 1"></i></p>
+            <p>Họ và tên: <b>{{user.last_name}} {{user.first_name}}</b> <i class="fa fas fa-check-circle text-success" *ngIf="user.verification == 1"></i></p>
             <p>Giới tính: <b *ngIf="user.sex == 1">Nam</b> <b *ngIf="user.sex == 0">Nữ</b></p>
             <p>Sinh nhật: <b>{{user.birthday}}</b></p>
             <p>Số điện thoại: <b>{{user.phone}}</b></p>
