@@ -7,6 +7,7 @@ import { AuthGuardService } from '../../auth/auth-guard.service';
 import { DashboardService } from './dashboard.service';
 import { DashboardModel } from './dashboard.model';
 import { User } from '../../shared/models/user.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -19,9 +20,13 @@ export class DashboardPageComponent implements OnInit {
 
   public dashboardInfo = new DashboardModel();
 
+  public isLoading = false;
+  public isRetry = false;
+
   constructor(private sharedService: SharedService,
     private authService: AuthService,
-    private dashboardService: DashboardService) {
+    private dashboardService: DashboardService,
+    private toast: ToastrService) {
     this.checkAccessPage();
   }
 
@@ -34,10 +39,19 @@ export class DashboardPageComponent implements OnInit {
   }
 
   initPage() {
+    this.isLoading = true;
     this.dashboardService.getDashboardInfo().subscribe(res => {
-      this.dashboardInfo = res;
-      const userInfo: User = this.sharedService.getLocalStorage(CommonConstants.userInfo);
-      this.currentUser = userInfo;
+      if (res) {
+        this.dashboardInfo = res;
+        const userInfo: User = this.sharedService.getLocalStorage(CommonConstants.userInfo);
+        this.currentUser = userInfo;
+        this.isLoading = false;
+      } else {
+        this.isRetry = true;
+      }
+    }, error => {
+      this.isLoading = false;
+      this.isRetry = true;
     });
   }
 

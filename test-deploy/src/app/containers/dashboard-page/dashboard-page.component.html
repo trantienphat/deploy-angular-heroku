@@ -1,5 +1,5 @@
 <div class="dashboard-page">
-  <div class="dashboard-container">
+  <div class="dashboard-container d-flex flex-column">
 
     <div class="header-cover align-self-start d-flex flex-row bg-dark justify-content-center align-items-center p-2">
       <div class="title d-flex flex-row flex-grow-1 ml-2 h3 text-white">
@@ -30,7 +30,11 @@
       </div>
     </div>
 
-    <div class="dashboard-content d-flex flex-column p-4">
+    <div class="w-100 h-100"*ngIf="isLoading">
+        <app-loading class="loading" [isRetry]="isRetry"></app-loading>
+    </div>
+    
+    <div class="dashboard-content d-flex flex-column p-4" *ngIf="!isLoading">
       <p class="h2">THỐNG KÊ</p>
       <!-- Thống kê thành viên -->
       <div class="mt-2">
@@ -138,6 +142,7 @@
           </div>
         </div>
       </div>
+      
     </div>
   </div>
 </div>
