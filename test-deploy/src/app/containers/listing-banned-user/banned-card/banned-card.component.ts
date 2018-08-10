@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User, BannedRequest, DeleteBannedReuest } from '../../../shared/models/user.model';
+import { User, BannedRequest } from '../../../shared/models/user.model';
 import { SharedService } from '../../../shared/services/shared.service';
 import { UserService } from '../../../shared/services/user.service';
 import { ToastrService } from 'ngx-toastr';
