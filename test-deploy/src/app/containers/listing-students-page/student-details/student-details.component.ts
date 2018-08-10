@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, GetUserInfoRequest } from '../../../shared/models/user.model';
+import { User, GetUserInfoRequest, BannedRequest } from '../../../shared/models/user.model';
 import { SharedService } from '../../../shared/services/shared.service';
 import { UserService } from '../../../shared/services/user.service';
 import { PageName } from '../../../shared/constants/routing.constant';
@@ -17,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 export class StudentDetailsComponent implements OnInit {
 
   public id = '';
-  public user = new User(); // Current Admin login
+  public currentUser = new User(); // Current Admin login
   public student = new User();
 
   public studentAvatar = '';
@@ -26,7 +26,7 @@ export class StudentDetailsComponent implements OnInit {
   public isLoading = false;
   public isRetry = false;
 
-  public bannedSubcription: Subscription;
+  // public bannedSubcription: Subscription;
 
   constructor(private sharedService: SharedService,
     private userService: UserService,
@@ -49,11 +49,11 @@ export class StudentDetailsComponent implements OnInit {
     if (!_user) {
       this.authService.logout();
     } else {
-      this.user = _user;
-      this.bannedSubcription = this.sharedService.bannedSubcription.subscribe(res => {
-        this.toast.success('Tài khoản đã bị khóa');
-        this.sharedService.routingToPage(PageName.LISTING_STUDENT_PAGE);
-      });
+      this.currentUser = _user;
+      // this.bannedSubcription = this.sharedService.bannedSubcription.subscribe(res => {
+      //   this.toast.success('Tài khoản đã bị khóa');
+      //   this.sharedService.routingToPage(PageName.LISTING_STUDENT_PAGE);
+      // });
       this.activatedRoute.queryParams.subscribe(param => {
         this.id = param.id;
         this.getStudentById(this.id);
@@ -88,6 +88,27 @@ export class StudentDetailsComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(param => {
       this.id = param.id;
       this.getStudentById(this.id);
+    });
+  }
+
+  onClickBannedButton() {
+    this.isLoading = true;
+    const bannedRole = '0';
+    const request: BannedRequest = {
+      id: this.student.id,
+      authorization: bannedRole
+    };
+    this.userService.updateUserInfo(request).subscribe(res => {
+      const response = res.body;
+      if (response && response.status === '1') {
+        // this.sharedService.bannedSubcription.next();
+        this.toast.success('Khóa tài khoản thành công');
+        this.sharedService.routingToPage(PageName.LISTING_STUDENT_PAGE);
+        this.isLoading = false;
+      }
+    }, error => {
+      this.isLoading = false;
+      this.toast.error('Có lỗi xảy ra. Vui lòng thử lại');
     });
   }
 

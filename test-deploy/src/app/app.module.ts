@@ -36,6 +36,7 @@ import { RequisitionDetailsComponent } from './containers/listing-requisitions-p
 import { StudentDetailsComponent } from './containers/listing-students-page/student-details/student-details.component';
 import { TutorDetailsComponent } from './containers/listing-tutors-page/tutor-details/tutor-details.component';
 import { LoadingComponent } from './shared/components/loading/loading.component';
+import { CardVerificationInfoComponent } from './shared/components/card-verification-info/card-verification-info.component';
 
 
 
@@ -53,7 +54,8 @@ import { LoadingComponent } from './shared/components/loading/loading.component'
     RequisitionDetailsComponent,
     StudentDetailsComponent,
     TutorDetailsComponent,
-    LoadingComponent
+    LoadingComponent,
+    CardVerificationInfoComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { RequisitionDetailsComponent } from './containers/listing-requisitions-page/requisition-details/requisition-details.component';
 import { StudentDetailsComponent } from './containers/listing-students-page/student-details/student-details.component';
 import { TutorDetailsComponent } from './containers/listing-tutors-page/tutor-details/tutor-details.component';
+import { CardVerificationInfoComponent } from './shared/components/card-verification-info/card-verification-info.component';
 
 const appRoutes: Routes = [
   { path: PageName.LOGIN_PAGE, component: LoginComponent },
@@ -29,6 +30,8 @@ const appRoutes: Routes = [
   { path: PageName.DETAILS_STUDENT_INFO_PAGE + '/:id', component: StudentDetailsComponent, canActivate: [AuthGuardService] },
   { path: PageName.DETAILS_TUTOR_INFO_PAGE, component: TutorDetailsComponent, canActivate: [AuthGuardService] },
   { path: PageName.DETAILS_TUTOR_INFO_PAGE + '/:id', component: TutorDetailsComponent, canActivate: [AuthGuardService] },
+  { path: PageName.DATAILS_VERIFICATION_DOCUMENT, component: CardVerificationInfoComponent, canActivate: [AuthGuardService] },
+  { path: PageName.DATAILS_VERIFICATION_DOCUMENT + '/:id', component: CardVerificationInfoComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({

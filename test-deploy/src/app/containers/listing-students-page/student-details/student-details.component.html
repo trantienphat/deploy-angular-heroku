@@ -7,7 +7,7 @@
         <div ngbDropdown placement="bottom-right">
           <button class="menu-button border-0 bg-transparent text-white" ngbDropdownToggle>
             <span class="menu-button__label fa fas fa-user"></span>
-            {{user.email}}
+            {{currentUser.email}}
             <i class="fa fas fa-caret-down ml-1"></i>
           </button>
           <div ngbDropdownMenu class="pop-menu border rounded-0">
@@ -49,12 +49,13 @@
             <p>Giới tính: <b *ngIf="student.sex == 1">Nam</b> <b *ngIf="student.sex == 0">Nữ</b></p>
             <p>Sinh nhật: <b>{{student.birthday}}</b></p>
             <p>Trình độ: <b>{{student.degree_name}}</b></p>
-            <p>Công việc: <b>{{student.degree_name}}</b></p>
-            <p>Số điện thoại: <b>{{student.career}}</b></p>
+            <p>Công việc: <b>{{student.career}}</b></p>
+            <p>Số điện thoại: <b>{{student.phone}}</b></p>
             <p>Skype: <b>{{student.skype}}</b></p>
             <p>Email: <b>{{student.email}}</b></p>
             <p>Địa chỉ: <b>{{student.address}}</b></p>
             <p>Ngày gia nhập: <b>{{student.date_registered}}</b></p>
+            <button class="btn btn-danger" (click)="onClickBannedButton()">Khóa tài khoản</button>
           </div>
         </div>
       </div>

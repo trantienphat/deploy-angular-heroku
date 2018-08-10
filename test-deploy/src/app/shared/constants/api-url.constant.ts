@@ -10,4 +10,6 @@ export class ApiUrl {
     // REQUISITION
     public static GET_REQUISITIONS_API = '/api/requisitioncourse/getrequisitioncourses.php';
     public static GET_REQUISITIONS_BY_ID_API = '/api/requisitioncourse/getrequisitioncoursebyid.php';
+    // VERIFICATION DOCUMENT
+    public static GET_VERIFICATION_USER = '/api/verificationdocument/getverificationdocumentsuser.php';
 }
