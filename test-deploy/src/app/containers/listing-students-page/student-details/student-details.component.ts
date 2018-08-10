@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, GetUserInfoRequest, BannedRequest } from '../../../shared/models/user.model';
+import { User, GetUserInfoRequest, BannedRequest, AddBannedRequest } from '../../../shared/models/user.model';
 import { SharedService } from '../../../shared/services/shared.service';
 import { UserService } from '../../../shared/services/user.service';
 import { PageName } from '../../../shared/constants/routing.constant';
@@ -8,6 +8,7 @@ import { AuthService } from '../../../auth/auth.service';
 import { CommonConstants } from '../../../shared/constants/common.constant';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { BannedService } from '../../../shared/services/banned.service';
 
 @Component({
   selector: 'app-student-details',
@@ -32,7 +33,8 @@ export class StudentDetailsComponent implements OnInit {
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
-    private toast: ToastrService) {
+    private toast: ToastrService,
+    private bannedService: BannedService) {
     this.checkAccessPage();
   }
 
@@ -94,6 +96,7 @@ export class StudentDetailsComponent implements OnInit {
   onClickBannedButton() {
     this.isLoading = true;
     const bannedRole = '0';
+    const oldRole = '' + this.student.authorization;
     const request: BannedRequest = {
       id: this.student.id,
       authorization: bannedRole
@@ -102,9 +105,19 @@ export class StudentDetailsComponent implements OnInit {
       const response = res.body;
       if (response && response.status === '1') {
         // this.sharedService.bannedSubcription.next();
-        this.toast.success('Khóa tài khoản thành công');
-        this.sharedService.routingToPage(PageName.LISTING_STUDENT_PAGE);
-        this.isLoading = false;
+        const requestBanned: AddBannedRequest = {
+          user_id: this.student.id,
+          old_auth: oldRole
+        };
+        this.bannedService.addBanned(requestBanned).subscribe(resx => {
+          if (resx.body && resx.body.status === '1') {
+            this.toast.success('Khóa tài khoản thành công');
+            this.sharedService.routingToPage(PageName.LISTING_STUDENT_PAGE);
+            this.isLoading = false;
+          }
+        }, error => {
+          this.toast.error('Có lỗi xảy ra. Vui lòng thử lại');
+        });
       }
     }, error => {
       this.isLoading = false;

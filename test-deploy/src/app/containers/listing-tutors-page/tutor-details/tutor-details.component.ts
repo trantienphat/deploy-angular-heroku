@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, GetUserInfoRequest, BannedRequest } from '../../../shared/models/user.model';
+import { User, GetUserInfoRequest, BannedRequest, AddBannedRequest } from '../../../shared/models/user.model';
 import { SharedService } from '../../../shared/services/shared.service';
 import { UserService } from '../../../shared/services/user.service';
 import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { VerificationDocument, GetVerificationDocumentUserRequest } from '../../../shared/models/verificationdocument.model';
 import { VerificationDocumentService } from '../../../shared/services/verification-document.service';
+import { BannedService } from '../../../shared/services/banned.service';
 
 @Component({
   selector: 'app-tutor-details',
@@ -37,7 +38,8 @@ export class TutorDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
     private toast: ToastrService,
-    private verificationDocumentService: VerificationDocumentService) {
+    private verificationDocumentService: VerificationDocumentService,
+    private bannedService: BannedService) {
     this.checkAccessPage();
   }
 
@@ -112,6 +114,7 @@ export class TutorDetailsComponent implements OnInit {
   onClickBannedButton() {
     this.isLoading = true;
     const bannedRole = '0';
+    const oldRole = '' + this.tutor.authorization;
     const request: BannedRequest = {
       id: this.tutor.id,
       authorization: bannedRole
@@ -119,9 +122,19 @@ export class TutorDetailsComponent implements OnInit {
     this.userService.updateUserInfo(request).subscribe(res => {
       const response = res.body;
       if (response && response.status === '1') {
-        this.toast.success('Khóa tài khoản thành công');
-        this.sharedService.routingToPage(PageName.LISTING_TUTOR_PAGE);
-        this.isLoading = false;
+        const requestBanned: AddBannedRequest = {
+          user_id: this.tutor.id,
+          old_auth: oldRole
+        };
+        this.bannedService.addBanned(requestBanned).subscribe(resx => {
+          if (resx.body && resx.body.status === '1') {
+            this.toast.success('Khóa tài khoản thành công');
+            this.sharedService.routingToPage(PageName.LISTING_TUTOR_PAGE);
+            this.isLoading = false;
+          }
+        }, error => {
+          this.toast.error('Có lỗi xảy ra. Vui lòng thử lại');
+        });
       }
     }, error => {
       this.isLoading = false;

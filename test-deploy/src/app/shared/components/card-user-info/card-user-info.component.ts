@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User, BannedRequest } from '../../models/user.model';
+import { User, BannedRequest, AddBannedRequest } from '../../models/user.model';
 import { SharedService } from '../../services/shared.service';
 import { PageName } from '../../constants/routing.constant';
 import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { BannedService } from '../../services/banned.service';
 
 @Component({
   selector: 'app-card-user-info',
@@ -19,7 +20,8 @@ export class CardUserInfoComponent implements OnInit {
 
   constructor(private sharedService: SharedService,
      private userService: UserService,
-     private toast: ToastrService) { }
+     private toast: ToastrService,
+     private bannedService: BannedService) { }
 
   ngOnInit() {
     this.setUserAvatar();
@@ -42,6 +44,7 @@ export class CardUserInfoComponent implements OnInit {
 
   onClickBannedButton() {
     const bannedRole = '0';
+    const oldRole = '' + this.user.authorization;
     const request: BannedRequest = {
       id: this.user.id,
       authorization: bannedRole
@@ -49,8 +52,18 @@ export class CardUserInfoComponent implements OnInit {
     this.userService.updateUserInfo(request).subscribe(res => {
       const response = res.body;
       if (response && response.status === '1') {
+        const requestBanned: AddBannedRequest = {
+          user_id: this.user.id,
+          old_auth: oldRole
+        };
+        this.bannedService.addBanned(requestBanned).subscribe(resx => {
+          if (resx.body && resx.body.status === '1') {
+            this.sharedService.bannedSubcription.next();
+          }
+        }, error => {
+          this.toast.error('Có lỗi xảy ra. Vui lòng thử lại');
+        });
         // this.toast.success('Khóa tài khoản thành công');
-        this.sharedService.bannedSubcription.next();
       }
     }, error => {
       this.toast.error('Có lỗi xảy ra. Vui lòng thử lại');
