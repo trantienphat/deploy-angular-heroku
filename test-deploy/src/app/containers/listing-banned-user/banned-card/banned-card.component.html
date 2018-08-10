@@ -13,10 +13,10 @@
         <b>{{user.last_name}} {{user.first_name}} </b>
       </p>
       <p>Loại thành viên cũ:
-        <b *ngIf="user.old_auth == 1"> Học viên</b>
-        <b *ngIf="user.old_auth == 2"> Gia sư</b>
-        <b *ngIf="user.old_auth == 3"> Học viên - Gia sư</b>
-        <b *ngIf="user.old_auth == 4"> Admin</b>
+        <b *ngIf="user.old_auth == '1'"> Học viên</b>
+        <b *ngIf="user.old_auth == '2'"> Gia sư</b>
+        <b *ngIf="user.old_auth == '3'"> Học viên - Gia sư</b>
+        <b *ngIf="user.old_auth == '4'"> Admin</b>
       </p>
       <p>Giới tính:
         <b *ngIf="user.sex == 0">Nữ</b>
