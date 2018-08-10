@@ -22,3 +22,16 @@ export class VerificationDocument {
 export class GetVerificationDocumentUserRequest {
     public user_id: string;
 }
+
+export class GetVerificationDocumentIdRequest {
+    public id: string;
+}
+
+export class UpdateVerificationDocumentRequest {
+    public id: string;
+    public verification: string;
+}
+
+export class UpdateVerificationDocumentResponse {
+    public id: string;
+}

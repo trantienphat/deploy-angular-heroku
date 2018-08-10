@@ -1,0 +1,62 @@
+.verification-document-details-page {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #fff url(/assets/img/bokeh-2152298_960_720.jpg) repeat scroll;
+}
+
+.verification-document-details-container {
+    width: 100%;
+    height: 90%;
+    overflow: auto;
+}
+
+.img-thumbnail {
+    width: 45%;
+}
+.header-cover {
+    width: 100%;
+    height: 10%;
+}
+
+.dropdown-item {
+
+    &:hover {
+        cursor: pointer;
+        background-color: #f8f9fa;
+    }
+}
+
+.menu-button {
+    
+    &__label {
+        cursor: pointer;
+    }
+
+    &::after {
+        content: unset !important;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+}
+
+.loading {
+
+    height: 100%;
+    width: 100%;
+    position: fixed; 
+    z-index: 1; 
+    background-color: rgb(255, 255, 255); 
+    overflow-x: hidden; 
+}
+
+.details-button {
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
