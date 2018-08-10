@@ -91,6 +91,10 @@ export class ListingRequisitionsPageComponent implements OnInit {
     this.sharedService.routingToPage(PageName.LISTING_REQUISITION_PAGE);
   }
 
+  onClickListingBannedButton() {
+    this.sharedService.routingToPage(PageName.LISTING_BANNED_PAGE);
+  }
+
   onClickLogoutButton() {
     this.authService.logout();
   }

@@ -1,5 +1,4 @@
-<div class="change-password-page">
-
+<div class="listing-banned-page">
   <div class="header-cover align-self-start d-flex flex-row bg-dark justify-content-center align-items-center p-2">
     <div class="title d-flex flex-row flex-grow-1 ml-2 h3 text-white">
       Eways
@@ -7,7 +6,7 @@
     <div ngbDropdown placement="bottom-right">
       <button class="menu-button border-0 bg-transparent text-white" ngbDropdownToggle>
         <span class="menu-button__label fa fas fa-user"></span>
-        {{currentUser.email}}
+        {{user.email}}
         <i class="fa fas fa-caret-down ml-1"></i>
       </button>
       <div ngbDropdownMenu class="pop-menu border rounded-0">
@@ -31,33 +30,26 @@
     </div>
   </div>
 
-  <div class="change-password-container">
+  <div class="listing-banned-container">
 
-    <div class="change-password-page-content d-flex flex-column p-4 w-100 h-100">
-      <div class="card border-0 mt-2">
-        <div class="card-header bg-info">
-          <p class="h3 text-white">
-            <i class="fa fas fa-key"></i> Đổi mật khẩu
-          </p>
-        </div>
-        <div class="card-body border border-top-0 p-3 d-flex flex-column">
-          <form>
-            <div class="form-group">
-              <label for="oldPassword">Mật khẩu cũ:</label>
-              <input type="password" class="form-control" id="oldPassword" placeholder="Mật khẩu cũ" [(ngModel)]="oldPassword" name="oldPassword">
-            </div>
-            <div class="form-group">
-              <label for="newPassword">Mật khẩu mới:</label>
-              <input type="password" class="form-control" id="newPassword" placeholder="Mật khẩu mới" [(ngModel)]="newPassword" name="newPassword">
-            </div>
-            <div class="form-group">
-              <label for="repeatNewPassword">Xác nhận mật khẩu mới: </label>
-              <input type="password" class="form-control" id="repeatNewPassword" placeholder="Nhập lại mật khẩu mới" [(ngModel)]="repeatNewPassword"
-                name="repeatNewPassword">
-            </div>
-            <button type="submit" class="btn btn-primary" (click)="onClickSubmitButton()">Xác nhận</button>
-          </form>
-        </div>
+    <div class="w-100 h-100" *ngIf="isLoading">
+      <app-loading class="loading" [isRetry]="isRetry" (retry)="onClickRetry($event)"></app-loading>
+    </div>
 
+    <div class="dashboard-content d-flex flex-column p-4 w-100 h-100" *ngIf="!isLoading">
+      <p class="h2">DANH SÁCH GIA SƯ</p>
+      <div class="mb-4">
+        <div class="paging w-100 text-right">
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        </div>
+        <div class="mt-4" *ngFor="let tutor of arrayTutor | paginate: { itemsPerPage: pageSize, currentPage: page }">
+          <app-card-user-info [isStudent]="isStudent" [user]="tutor"></app-card-user-info>
+        </div>
+        <div class="paging w-100 text-right mt-4">
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        </div>
       </div>
     </div>
+
+  </div>
+</div>

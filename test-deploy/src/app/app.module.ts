@@ -37,6 +37,8 @@ import { StudentDetailsComponent } from './containers/listing-students-page/stud
 import { TutorDetailsComponent } from './containers/listing-tutors-page/tutor-details/tutor-details.component';
 import { LoadingComponent } from './shared/components/loading/loading.component';
 import { CardVerificationInfoComponent } from './shared/components/card-verification-info/card-verification-info.component';
+import { ListingBannedUserComponent } from './containers/listing-banned-user/listing-banned-user.component';
+import { DetailsBannedUserComponent } from './containers/listing-banned-user/details-banned-user/details-banned-user.component';
 
 
 
@@ -55,7 +57,9 @@ import { CardVerificationInfoComponent } from './shared/components/card-verifica
     StudentDetailsComponent,
     TutorDetailsComponent,
     LoadingComponent,
-    CardVerificationInfoComponent
+    CardVerificationInfoComponent,
+    ListingBannedUserComponent,
+    DetailsBannedUserComponent
   ],
   imports: [
     BrowserModule,

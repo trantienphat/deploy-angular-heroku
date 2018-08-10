@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
 import { UserService } from '../../services/user.service';
-import { User, ChangeAuthRequest, ChangeVerificationRequest } from '../../models/user.model';
+import { User, ChangeVerificationRequest } from '../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { VerificationDocumentService } from '../../services/verification-document.service';

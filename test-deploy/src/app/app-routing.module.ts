@@ -14,6 +14,8 @@ import { RequisitionDetailsComponent } from './containers/listing-requisitions-p
 import { StudentDetailsComponent } from './containers/listing-students-page/student-details/student-details.component';
 import { TutorDetailsComponent } from './containers/listing-tutors-page/tutor-details/tutor-details.component';
 import { CardVerificationInfoComponent } from './shared/components/card-verification-info/card-verification-info.component';
+import { DetailsBannedUserComponent } from './containers/listing-banned-user/details-banned-user/details-banned-user.component';
+import { ListingBannedUserComponent } from './containers/listing-banned-user/listing-banned-user.component';
 
 const appRoutes: Routes = [
   { path: PageName.LOGIN_PAGE, component: LoginComponent },
@@ -32,6 +34,9 @@ const appRoutes: Routes = [
   { path: PageName.DETAILS_TUTOR_INFO_PAGE + '/:id', component: TutorDetailsComponent, canActivate: [AuthGuardService] },
   { path: PageName.DATAILS_VERIFICATION_DOCUMENT, component: CardVerificationInfoComponent, canActivate: [AuthGuardService] },
   { path: PageName.DATAILS_VERIFICATION_DOCUMENT + '/:id', component: CardVerificationInfoComponent, canActivate: [AuthGuardService] },
+  { path: PageName.LISTING_BANNED_PAGE, component: ListingBannedUserComponent, canActivate: [AuthGuardService] },
+  { path: PageName.DETAILS_BANNED, component: DetailsBannedUserComponent, canActivate: [AuthGuardService] },
+  { path: PageName.DETAILS_BANNED + '/:id', component: DetailsBannedUserComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({

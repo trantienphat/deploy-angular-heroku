@@ -11,14 +11,15 @@ export class User {
     public address: string;
     public degree: number;
     public verification: number;
-    public authorization: number;
+    public authorization?: number;
     public career?: string;
     public date_registered?: string;
     public status?: string;
     public degree_name?: string;
+    public old_auth?: string;
 
     constructor(data?: any) {
-        if (!data) {return;}
+        if (!data) {return; }
         this.id = data.id;
         this.avatar = data.avatar;
         this.first_name = data.first_name;
@@ -36,6 +37,7 @@ export class User {
         this.date_registered = data.date_registered;
         this.status = data.status;
         this.degree_name = data.degree_name;
+        this.old_auth = data.old_auth;
     }
 }
 
