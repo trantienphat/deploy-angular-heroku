@@ -39,6 +39,8 @@ import { LoadingComponent } from './shared/components/loading/loading.component'
 import { CardVerificationInfoComponent } from './shared/components/card-verification-info/card-verification-info.component';
 import { ListingBannedUserComponent } from './containers/listing-banned-user/listing-banned-user.component';
 import { DetailsBannedUserComponent } from './containers/listing-banned-user/details-banned-user/details-banned-user.component';
+import { BannedCardComponent } from './containers/listing-banned-user/banned-card/banned-card.component';
+import { BannedService } from './shared/services/banned.service';
 
 
 
@@ -59,7 +61,8 @@ import { DetailsBannedUserComponent } from './containers/listing-banned-user/det
     LoadingComponent,
     CardVerificationInfoComponent,
     ListingBannedUserComponent,
-    DetailsBannedUserComponent
+    DetailsBannedUserComponent,
+    BannedCardComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +96,8 @@ import { DetailsBannedUserComponent } from './containers/listing-banned-user/det
     UserService,
     VerificationDocumentTypeService,
     VerificationDocumentService,
-    DashboardService],
+    DashboardService,
+    BannedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

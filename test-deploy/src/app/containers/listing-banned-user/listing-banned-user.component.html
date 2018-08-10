@@ -37,13 +37,13 @@
     </div>
 
     <div class="dashboard-content d-flex flex-column p-4 w-100 h-100" *ngIf="!isLoading">
-      <p class="h2">DANH SÁCH GIA SƯ</p>
+      <p class="h2">DANH SÁCH THÀNH VIÊN BỊ KHÓA</p>
       <div class="mb-4">
         <div class="paging w-100 text-right">
           <pagination-controls (pageChange)="page = $event"></pagination-controls>
         </div>
-        <div class="mt-4" *ngFor="let tutor of arrayTutor | paginate: { itemsPerPage: pageSize, currentPage: page }">
-          <app-card-user-info [isStudent]="isStudent" [user]="tutor"></app-card-user-info>
+        <div class="mt-4" *ngFor="let banned of bannedArray | paginate: { itemsPerPage: pageSize, currentPage: page }">
+          <app-banned-card [user]="banned"></app-banned-card>
         </div>
         <div class="paging w-100 text-right mt-4">
           <pagination-controls (pageChange)="page = $event"></pagination-controls>

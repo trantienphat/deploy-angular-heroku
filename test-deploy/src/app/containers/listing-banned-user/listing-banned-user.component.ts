@@ -6,6 +6,8 @@ import { User } from '../../shared/models/user.model';
 import { CommonConstants } from '../../shared/constants/common.constant';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../shared/services/user.service';
+import { Subscription } from 'rxjs';
+import { BannedService } from '../../shared/services/banned.service';
 
 @Component({
   selector: 'app-listing-banned-user',
@@ -23,10 +25,13 @@ export class ListingBannedUserComponent implements OnInit {
   public pageSize = 10;
   public page = 1;
 
+  public bannedUnlockSubcription: Subscription;
+
   constructor(private sharedService: SharedService,
   private authService: AuthService,
   private toast: ToastrService,
-  private userService: UserService) {
+  private userService: UserService,
+  private bannedService: BannedService) {
     this.checkAccessPage();
   }
 
@@ -44,12 +49,25 @@ export class ListingBannedUserComponent implements OnInit {
       this.authService.logout();
     } else {
       this.currentUser = _user;
-      // this.bannedSubcription = this.sharedService.bannedSubcription.subscribe(res => {
-      //   this.toast.success('Tài khoản đã bị khóa');
-      //   this.getArrayTutor();
-      // });
-      // this.getArrayTutor();
+      this.bannedUnlockSubcription = this.sharedService.bannedUnlockSubcription.subscribe(res => {
+        this.toast.success('Tài khoản đã mở khóa');
+        this.getBanneds();
+      });
+      this.getBanneds();
     }
+  }
+
+  getBanneds() {
+    this.isLoading = true;
+    this.isRetry = false;
+    this.bannedService.getBanneds().subscribe(res => {
+      console.log(res);
+      this.isLoading = false;
+      this.bannedArray = res;
+    }, error => {
+      this.isLoading = false;
+      this.isRetry = true;
+    });
   }
 
   ngOnInit() {
