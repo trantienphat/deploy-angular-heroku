@@ -83,3 +83,12 @@ export class BannedRequest {
 export class BannedResponse {
     public status: string;
 }
+
+export class ChangeVerificationRequest {
+    public id: string;
+    public verification: string;
+}
+
+export class ChangeVerificationResponse {
+    public status: string;
+}

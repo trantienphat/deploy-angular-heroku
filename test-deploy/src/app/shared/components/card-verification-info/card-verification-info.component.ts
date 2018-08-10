@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
 import { UserService } from '../../services/user.service';
-import { User } from '../../models/user.model';
+import { User, ChangeAuthRequest, ChangeVerificationRequest } from '../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { VerificationDocumentService } from '../../services/verification-document.service';
 import { AuthService } from '../../../auth/auth.service';
 import { PageName } from '../../constants/routing.constant';
 import { CommonConstants } from '../../constants/common.constant';
-import { VerificationDocument, GetVerificationDocumentIdRequest, UpdateVerificationDocumentRequest } from '../../models/verificationdocument.model';
+import { VerificationDocument,
+    GetVerificationDocumentIdRequest,
+    UpdateVerificationDocumentRequest } from '../../models/verificationdocument.model';
 
 @Component({
   selector: 'app-card-verification-info',
@@ -86,6 +88,7 @@ export class CardVerificationInfoComponent implements OnInit {
   }
 
   onClickSuccessButton() {
+    this.isLoading = true;
     const verifcationVerifi = '1';
     const request: UpdateVerificationDocumentRequest = {
       id: this.id,
@@ -93,12 +96,23 @@ export class CardVerificationInfoComponent implements OnInit {
     };
     this.verificationDocumentService.updateVerificationDocument(request).subscribe(res => {
       if (res.body && res.body.status == 1) {
-        this.toast.success('Đã xác minh');
-        const routing = {
-          id: this.verificationDocument.user_id
+        const requestUpdate: ChangeVerificationRequest = {
+          id: this.verificationDocument.user_id,
+          verification: '1'
         };
-        this.isLoading = false;
-        this.sharedService.routingToPageWithParam(PageName.DETAILS_TUTOR_INFO_PAGE, routing);
+        this.userService.updateUserInfo(requestUpdate).subscribe(resx => {
+          if ( resx.body && resx.body.status == 1) {
+            this.toast.success('Đã xác minh');
+            const routing = {
+              id: this.verificationDocument.user_id
+            };
+            this.isLoading = false;
+            this.sharedService.routingToPageWithParam(PageName.DETAILS_TUTOR_INFO_PAGE, routing);
+          }
+        }, error => {
+          this.isLoading = false;
+          this.toast.error('Có lỗi xảy ra. Vui lòng thử lại!');
+        });
       }
     }, error => {
       this.isLoading = false;
