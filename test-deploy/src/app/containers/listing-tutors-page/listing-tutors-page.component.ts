@@ -103,13 +103,13 @@ export class ListingTutorsPageComponent implements OnInit {
     this.sharedService.routingToPage(PageName.LISTING_REQUISITION_PAGE);
   }
 
-  onClickListingBannedButton() {
-    this.sharedService.routingToPage(PageName.LISTING_BANNED_PAGE);
-  }
-
   onClickLogoutButton() {
     // Code here
     this.authService.logout();
+  }
+
+  onClickListingBannedButton() {
+    this.sharedService.routingToPage(PageName.LISTING_BANNED_PAGE);
   }
 
 }
