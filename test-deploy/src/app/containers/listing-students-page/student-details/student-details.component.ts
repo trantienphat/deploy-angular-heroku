@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, GetUserInfoRequest, BannedRequest, AddBannedRequest } from '../../../shared/models/user.model';
+import { User, GetUserInfoRequest, BannedRequest, AddBannedRequest, ChangePasswordRequest } from '../../../shared/models/user.model';
 import { SharedService } from '../../../shared/services/shared.service';
 import { UserService } from '../../../shared/services/user.service';
 import { PageName } from '../../../shared/constants/routing.constant';
@@ -28,6 +28,8 @@ export class StudentDetailsComponent implements OnInit {
   public isRetry = false;
 
   // public bannedSubcription: Subscription;
+
+  public newPassword = '';
 
   constructor(private sharedService: SharedService,
     private userService: UserService,
@@ -122,6 +124,30 @@ export class StudentDetailsComponent implements OnInit {
     }, error => {
       this.isLoading = false;
       this.toast.error('Có lỗi xảy ra. Vui lòng thử lại');
+    });
+  }
+
+  onClickResetPassword() {
+    this.isLoading = true;
+    this.isRetry = false;
+    const request: ChangePasswordRequest = {
+      id: this.student.id,
+      password: this.newPassword
+    };
+    this.userService.updateUserInfo(request).subscribe(res => {
+      if (res) {
+        this.toast.success('Thay đổi mật khẩu thành công');
+        this.newPassword = '';
+        this.isLoading = false;
+      } else {
+        this.toast.error('Thay đổi mật khẩu thất bại');
+        this.newPassword = '';
+        this.isRetry = true;
+      }
+    }, error => {
+      this.toast.error('Thay đổi mật khẩu thất bại');
+      this.newPassword = '';
+      this.isRetry = true;
     });
   }
 

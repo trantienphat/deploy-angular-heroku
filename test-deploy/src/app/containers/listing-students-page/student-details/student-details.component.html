@@ -79,6 +79,10 @@
             <p>Ngày gia nhập:
               <b>{{student.date_registered}}</b>
             </p>
+            <div class="reset-password d-flex flex-row mb-3">
+              <input [(ngModel)]="newPassword" type="password" placeholder="mật khẩu mới">
+              <button class="btn btn-warning border rounded-0" (click)="onClickResetPassword()">Reset password</button>
+            </div>
             <button class="btn btn-danger" (click)="onClickBannedButton()">Khóa tài khoản</button>
           </div>
         </div>
