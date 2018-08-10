@@ -112,7 +112,7 @@
                   </tr>
                 </tbody>
               </table>
-              <div class="paging w-100 text-right">
+              <div class="paging w-100 text-right" *ngIf="isShowData">
                 <pagination-controls (pageChange)="page = $event"></pagination-controls>
               </div>
             </div>
