@@ -94,3 +94,12 @@ export class ChangeVerificationRequest {
 export class ChangeVerificationResponse {
     public status: string;
 }
+
+export class GetBannedUserRequest {
+    public user_id: string;
+}
+
+export class AddBannedRequest {
+    public user_id: string;
+    public old_auth: string;
+}

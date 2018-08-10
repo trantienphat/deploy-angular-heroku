@@ -14,4 +14,9 @@ export class ApiUrl {
     public static GET_VERIFICATION_USER = '/api/verificationdocument/getverificationdocumentsuser.php';
     public static GET_VERIFICATION_ID = '/api/verificationdocument/getverificationdocumentbyid.php';
     public static UPDATE_VERIFICATION = '/api/verificationdocument/updateverificationdocument.php';
+    // BANNED
+    public static ADD_BANNED = '/api/banned/addnewbanned.php';
+    public static DELETE_BANNED = '/api/banned/deletebanned.php';
+    public static GET_BANNEDS = '/api/banned/getbanneds.php';
+    public static GET_BANNED_USER = '/api/banned/getbanneduser.php';
 }
